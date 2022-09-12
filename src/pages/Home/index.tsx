@@ -1,7 +1,14 @@
+import styles from './styles/index.module.css';
+import {useState} from "react";
+
 const Home = () => {
+
+
   return (
-    <div>
-      <h1 className="text-3xl">Welcome to Uver World!</h1>
+    <div className={styles.container}>
+      <h1>
+        Hello World!
+      </h1>
     </div>
   );
 }

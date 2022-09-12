@@ -4,18 +4,23 @@ import './assets/styles/globals.css';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Home from "./pages/Home";
+import Header from "./layouts/Header";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />}>
-          <Route index element={<Home />} />
-        </Route>
-      </Routes>
+      <Header />
+      <main className="bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-100 h-screen">
+        <Routes>
+          <Route path="/" element={<Home />}>
+            <Route index element={<Home />} />
+          </Route>
+        </Routes>
+      </main>
     </BrowserRouter>
   </React.StrictMode>
 );

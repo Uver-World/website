@@ -4,13 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --primary: #5f27cd;
-  --secondary: #341f97;
-  --dark: #080415;
-  --light: #f6f6f6;
-}
-
 html {
   box-sizing: border-box;
   font-size: 16px;
