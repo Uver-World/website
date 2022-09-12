@@ -1,6 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Raleway&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --primary: #5f27cd;
+  --secondary: #341f97;
+  --dark: #080415;
+  --light: #f6f6f6;
+}
 
 html {
   box-sizing: border-box;
@@ -9,6 +18,7 @@ html {
 
 *, *:before, *:after {
   box-sizing: inherit;
+  font-family: 'Raleway', serif;
 }
 
 body, h1, h2, h3, h4, h5, h6, p, ol, ul {
