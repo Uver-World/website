@@ -1,6 +1,7 @@
 import styles from "./styles/index.module.css";
 import {useState} from "react";
 import {Link} from "react-router-dom";
+import download from "../../assets/img/background.jpg";
 
 const Header = () => {
   const [isDark, setIsDark] = useState(false);
@@ -43,10 +44,11 @@ const Header = () => {
       <div>
 
       </div>
-      <div>
+      <div className={styles.rightSection}>
         <button onClick={() => toggleDarkMode()} className={`${styles.button} dark:hover:bg-slate-500`}>
           { darkToggle }
         </button>
+        <a href={download} download="UverWorld-1.0.0.exe" className={styles.appDownload}>Télécharger</a>
       </div>
     </header>
   )

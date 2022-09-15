@@ -11,3 +11,11 @@
     @apply text-xl;
     font-family: 'Montserrat', sans-serif;
 }
+
+.appDownload {
+    @apply text-center text-white bg-blue-600 ml-4 px-6 py-2 rounded-full hover:bg-blue-800 duration-150;
+}
+
+.rightSection {
+    @apply flex items-center justify-center;
+}
