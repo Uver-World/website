@@ -6,6 +6,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Home from "./pages/Home";
 import Header from "./layouts/Header";
 import Download from "./pages/Download";
+import Thanks from "./pages/Download/Thanks";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -20,7 +21,8 @@ root.render(
           <Route path="/" element={<Home />}>
             <Route index element={<Home />} />
           </Route>
-          <Route path="download" element={<Download />}>
+          <Route path="download">
+            <Route path="thanks" element={<Thanks />} />
             <Route index element={<Download />} />
           </Route>
         </Routes>

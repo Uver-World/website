@@ -1,7 +1,8 @@
 import styles from './styles/index.module.css';
-import background from '../../assets/img/background.jpg'
+import background from '../../assets/img/background.jpg';
 import download from "../../assets/img/background.jpg";
 import {Link} from "react-router-dom";
+import {useEffect} from "react";
 
 const Home = () => {
   return (
@@ -12,7 +13,10 @@ const Home = () => {
 
         <Link to="/download" className={styles.appDownload}>Télécharger gratuitement</Link>
       </div>
-      <img src={background} alt="background" className={styles.background} />
+
+      <video id="background-video" autoPlay muted className={styles.background}>
+        <source src="/background.webm" type="video/webm" />
+      </video>
     </section>
   );
 }
