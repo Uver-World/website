@@ -48,7 +48,7 @@ const Header = () => {
         <button onClick={() => toggleDarkMode()} className={`${styles.button} dark:hover:bg-slate-500`}>
           { darkToggle }
         </button>
-        <a href={download} download="UverWorld-1.0.0.exe" className={styles.appDownload}>Télécharger</a>
+        <Link to="/download" className={styles.appDownload}>Télécharger</Link>
       </div>
     </header>
   )
