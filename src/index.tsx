@@ -6,7 +6,6 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Home from "./pages/Home";
 import Header from "./layouts/Header";
 import Download from "./pages/Download";
-import Thanks from "./pages/Download/Thanks";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
