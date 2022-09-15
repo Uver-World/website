@@ -1,0 +1,25 @@
+.container {
+    @apply w-full h-full overflow-hidden relative;
+}
+
+.background {
+    @apply w-full h-full object-cover object-center absolute top-0 left-0 z-0;
+}
+
+.textContainer {
+    @apply w-full h-full flex flex-col justify-center items-center;
+}
+
+.title {
+    @apply text-6xl text-center text-white z-10 mb-5;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 4px;
+}
+
+.subtitle {
+    @apply text-2xl text-center text-white z-10 mt-5;
+}
+
+.appDownload {
+    @apply z-10 text-center text-white text-lg bg-blue-600 rounded-full py-3 px-8 mt-16 hover:bg-blue-800 duration-150;
+}

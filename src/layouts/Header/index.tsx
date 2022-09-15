@@ -1,5 +1,6 @@
 import styles from "./styles/index.module.css";
 import {useState} from "react";
+import {Link} from "react-router-dom";
 
 const Header = () => {
   const [isDark, setIsDark] = useState(false);
@@ -37,7 +38,7 @@ const Header = () => {
   return (
     <header className={`${styles.header} dark:bg-slate-900 dark:text-slate-100`}>
       <div>
-        <span className={styles.title}>UverWorld</span>
+        <Link className={styles.title} to="/">UverWorld</Link>
       </div>
       <div>
 

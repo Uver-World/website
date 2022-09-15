@@ -1,15 +1,18 @@
 import styles from './styles/index.module.css';
-import {useState} from "react";
+import background from '../../assets/img/background.jpg'
 
 const Home = () => {
 
-
   return (
-    <div className={styles.container}>
-      <h1>
-        Hello World!
-      </h1>
-    </div>
+    <section className={styles.container}>
+      <div className={styles.textContainer}>
+        <h1 className={styles.title}>UverWorld</h1>
+        <h2 className={styles.subtitle}>Simulez vos rêves</h2>
+
+        <a href="" className={styles.appDownload}>Télécharger gratuitement</a>
+      </div>
+      <img src={background} alt="background" className={styles.background} />
+    </section>
   );
 }
 
