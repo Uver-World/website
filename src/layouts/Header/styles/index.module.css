@@ -19,3 +19,7 @@
 .rightSection {
     @apply flex items-center justify-center;
 }
+
+.centerSection a {
+    @apply mx-2 font-bold;
+}

@@ -41,8 +41,9 @@ const Header = () => {
       <div>
         <Link className={styles.title} to="/">UverWorld</Link>
       </div>
-      <div>
-
+      <div className={styles.centerSection}>
+        <Link to="/">Accueil</Link>
+        <Link to="/about">À propos</Link>
       </div>
       <div className={styles.rightSection}>
         <button onClick={() => toggleDarkMode()} className={`${styles.button} dark:hover:bg-slate-500`}>

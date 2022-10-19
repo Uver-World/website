@@ -14,7 +14,7 @@ const Home = () => {
         <Link to="/download" className={styles.appDownload}>Télécharger gratuitement</Link>
       </div>
 
-      <video id="background-video" autoPlay muted className={styles.background}>
+      <video id="background-video" autoPlay loop muted className={styles.background}>
         <source src="/background.webm" type="video/webm" />
       </video>
     </section>

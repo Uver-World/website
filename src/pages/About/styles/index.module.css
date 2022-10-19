@@ -1,0 +1,3 @@
+.text {
+    @apply max-w-5xl mx-auto text-justify pt-12;
+}
