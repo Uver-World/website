@@ -3,8 +3,12 @@
     @apply hover:bg-slate-200;
 }
 
+.container {
+    @apply bg-slate-100 shadow-lg;
+}
+
 .header {
-    @apply px-4 py-2 flex justify-between items-center bg-slate-100 shadow-lg z-50 relative;
+    @apply py-2 flex justify-between max-w-5xl mx-auto items-center z-50 relative;
 }
 
 .title {

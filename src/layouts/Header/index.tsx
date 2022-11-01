@@ -37,21 +37,23 @@ const Header = () => {
   )
 
   return (
-    <header className={`${styles.header} dark:bg-slate-900 dark:text-slate-100`}>
-      <div>
-        <Link className={styles.title} to="/">UverWorld</Link>
-      </div>
-      <div className={styles.centerSection}>
-        <Link to="/">Accueil</Link>
-        <Link to="/about">À propos</Link>
-      </div>
-      <div className={styles.rightSection}>
-        <button onClick={() => toggleDarkMode()} className={`${styles.button} dark:hover:bg-slate-500`}>
-          { darkToggle }
-        </button>
-        <Link to="/download" className={styles.appDownload}>Télécharger</Link>
-      </div>
-    </header>
+    <div className={styles.container}>
+      <header className={`${styles.header} dark:bg-slate-900 dark:text-slate-100`}>
+        <div>
+          <Link className={styles.title} to="/">UverWorld</Link>
+        </div>
+        <div className={styles.centerSection}>
+          <Link to="/">Accueil</Link>
+          <Link to="/about">À propos</Link>
+        </div>
+        <div className={styles.rightSection}>
+          <button onClick={() => toggleDarkMode()} className={`${styles.button} dark:hover:bg-slate-500`}>
+            { darkToggle }
+          </button>
+          <Link to="/download" className={styles.appDownload}>Télécharger</Link>
+        </div>
+      </header>
+    </div>
   )
 }
 

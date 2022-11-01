@@ -17,7 +17,7 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Header />
-      <main className="bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-100 h-screen">
+      <main className="bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-100 min-h-screen">
         <Routes>
           <Route path="/" element={<Home />}>
             <Route index element={<Home />} />

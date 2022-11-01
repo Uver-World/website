@@ -1,5 +1,5 @@
 .container {
-    @apply w-full h-full overflow-hidden relative;
+    @apply w-full h-screen overflow-hidden relative;
 }
 
 .background {

@@ -1,3 +1,15 @@
+.container {
+    @apply max-w-5xl mx-auto py-24;
+}
+
 .text {
-    @apply max-w-5xl mx-auto text-justify pt-12;
+    @apply text-justify mb-6;
+}
+
+.title {
+    @apply text-2xl font-bold mb-3;
+}
+
+.subtitle {
+    @apply text-lg font-bold mb-3;
 }
