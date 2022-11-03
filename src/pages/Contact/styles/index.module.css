@@ -30,3 +30,7 @@
 .team {
     @apply rounded-2xl shadow-2xl;
 }
+
+.link {
+    @apply underline inline-block;
+}

@@ -8,6 +8,7 @@ import Header from "./layouts/Header";
 import Download from "./pages/Download";
 import Thanks from "./pages/Download/Thanks";
 import About from "./pages/About";
+import Contact from "./pages/Contact";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -27,6 +28,7 @@ root.render(
             <Route index element={<Download />} />
           </Route>
           <Route path="about" element={<About />}/>
+          <Route path="contact" element={<Contact />}/>
         </Routes>
       </main>
     </BrowserRouter>
