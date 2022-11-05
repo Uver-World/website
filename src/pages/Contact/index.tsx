@@ -23,8 +23,6 @@ const Contact = () => {
         <p className={styles.text}>
           Email: <a href="mailto:paul.compte@epitech.eu" className={styles.link}>paul.compte@epitech.eu</a>
         </p>
-
-        <img src={team} alt="Notre équipe" className={styles.team} />
       </div>
     </>
   )
