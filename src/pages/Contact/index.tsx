@@ -22,8 +22,6 @@ const Contact = () => {
 
         <p className={styles.text}>
           Email: <a href="mailto:paul.compte@epitech.eu" className={styles.link}>paul.compte@epitech.eu</a>
-          <br/>
-          Téléphone: 06 66 66 66 66
         </p>
 
         <img src={team} alt="Notre équipe" className={styles.team} />
