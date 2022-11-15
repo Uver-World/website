@@ -7,7 +7,6 @@ const Contact = () => {
     <>
       <div className={styles.hero}>
         <SolarSystem />
-        <span>Venez</span>
         <h1>Nous contacter</h1>
       </div>
       <div className={styles.container}>
