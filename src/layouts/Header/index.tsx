@@ -43,7 +43,7 @@ const Header = () => {
         </div>
         <div className={styles.centerSection}>
           <Link to="/">Accueil</Link>
-          <Link to="/about">Notre histoire</Link>
+          <Link to="/about">À propos</Link>
           <Link to="/contact">Contactez-nous</Link>
         </div>
         {/*<div className={styles.rightSection}>*/}

@@ -1,5 +1,4 @@
 import styles from './styles/index.module.css'
-import team from '../../assets/img/team.jpg'
 import SolarSystem from "../../components/SolarSystem";
 
 const Contact = () => {
