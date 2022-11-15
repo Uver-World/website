@@ -18,10 +18,14 @@ const Contact = () => {
 
         <h2 className={styles.title}>Nos coordonnées</h2>
 
-        <h3 className={styles.subtitle}>Paul Compte</h3>
+        <h3 className={styles.subtitle}>Paul Comte</h3>
 
         <p className={styles.text}>
-          Email: <a href="mailto:paul.compte@epitech.eu" className={styles.link}>paul.compte@epitech.eu</a>
+          Email: <a href="mailto:paul.comte@epitech.eu" className={styles.link}>paul.compte@epitech.eu</a>
+        </p>
+
+        <p className={styles.text}>
+          Vous pouvez aussi nous laissez votre adresse mail dans <a className={styles.link} href="https://forms.gle/3mN8azNnTpJDowxF9" target="_blank">ce formulaire</a>.
         </p>
       </div>
     </>
