@@ -1,0 +1,53 @@
+.container {
+    background: #D4DCDE;
+    @apply px-4 py-2;
+}
+
+.title {
+    @apply text-3xl font-bold text-center pt-24;
+}
+
+.table {
+    @apply max-w-4xl my-12 mx-auto;
+}
+
+.editIcon {
+    @apply text-xl cursor-pointer duration-300;
+    color: #62B6CB !important;
+}
+
+.editIcon:hover {
+    color: #478ea0 !important;
+}
+
+.deleteIcon {
+    @apply text-xl cursor-pointer duration-300 ml-2;
+    color: #FB9090 !important;
+}
+
+.deleteIcon:hover {
+    color: #c76a6a !important;
+}
+
+.badge {
+    @apply rounded-lg px-2 py-1 mr-4;
+}
+
+.addContainer {
+    @apply flex justify-end w-1/3 mx-auto;
+}
+
+.addInput {
+    @apply mr-4 rounded-lg !important;
+    background: #E9F0F2 !important;
+}
+
+.addButton {
+    background: #62B6CB !important;
+    color: #fff;
+    @apply rounded-full px-8 duration-300 !important;
+}
+
+.addButton:hover {
+    background: #488d9e !important;
+}

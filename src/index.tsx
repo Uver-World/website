@@ -9,6 +9,8 @@ import Download from "./pages/Download";
 import Thanks from "./pages/Download/Thanks";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import {UsersList} from "./pages/Admin/UsersList";
+import {ChakraProvider} from "@chakra-ui/react";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -16,22 +18,29 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Header />
-      <main className="bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-100 min-h-screen">
-        <Routes>
-          <Route path="/" element={<Home />}>
-            <Route index element={<Home />} />
-          </Route>
-          <Route path="download">
-            <Route path="thanks" element={<Thanks />} />
-            <Route index element={<Download />} />
-          </Route>
-          <Route path="about" element={<About />}/>
-          <Route path="contact" element={<Contact />}/>
-        </Routes>
-      </main>
-    </BrowserRouter>
+    <ChakraProvider>
+      <BrowserRouter>
+        <Header />
+        <main className="bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-100 min-h-screen" style={{
+          background: "#D4DCDE"
+        }}>
+          <Routes>
+            <Route path="/" element={<Home />}>
+              <Route index element={<Home />} />
+            </Route>
+            <Route path="download">
+              <Route path="thanks" element={<Thanks />} />
+              <Route index element={<Download />} />
+            </Route>
+            <Route path="about" element={<About />}/>
+            <Route path="contact" element={<Contact />}/>
+            <Route path="admin" element={<UsersList/>}>
+              <Route index element={<UsersList/>} />
+            </Route>
+          </Routes>
+        </main>
+      </BrowserRouter>
+    </ChakraProvider>
   </React.StrictMode>
 );
 

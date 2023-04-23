@@ -21,5 +21,6 @@
 }
 
 .appDownload {
-    @apply z-10 text-center text-white text-lg bg-blue-600 rounded-lg py-3 px-8 mt-16 hover:bg-blue-800 duration-150;
+    @apply z-10 text-center text-white text-lg rounded-full py-3 px-8 mt-16 hover:bg-blue-800 duration-150;
+    background-color: #62B6CB;
 }
