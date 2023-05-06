@@ -52,7 +52,7 @@ export const UsersList = () => {
 
   return (
   <div className={styles.container}>
-    <h1 className={styles.title}>Users management</h1>
+    <h1 className={styles.title}>User management</h1>
 
     <TableContainer>
       <Table variant='simple' className={styles.table}>

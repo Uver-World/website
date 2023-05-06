@@ -10,6 +10,7 @@ import Thanks from "./pages/Download/Thanks";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import {UsersList} from "./pages/Admin/UsersList";
+import {OrganisationList} from "./pages/Admin/OrganisationList";
 import {ChakraProvider} from "@chakra-ui/react";
 import {UserEdit} from "./pages/Admin/UserEdit";
 
@@ -36,6 +37,10 @@ root.render(
             <Route path="admin">
               <Route path="users">
                 <Route index element={<UsersList/>}/>
+                <Route path="1" element={<UserEdit/>} />
+              </Route>
+              <Route path="organisations">
+                <Route index element={<OrganisationList/>}/>
                 <Route path="1" element={<UserEdit/>} />
               </Route>
             </Route>
