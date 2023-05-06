@@ -23,7 +23,7 @@ const Contact = () => {
         </p>
 
         <p className={styles.text}>
-          Vous pouvez aussi nous laissez votre adresse mail dans <a className={styles.link} href="https://forms.gle/3mN8azNnTpJDowxF9" target="_blank">ce formulaire</a>.
+          Vous pouvez aussi nous laissez votre adresse mail dans <a className={styles.link} rel="noreferrer" href="https://forms.gle/3mN8azNnTpJDowxF9" target="_blank">ce formulaire</a>.
         </p>
       </div>
     </>

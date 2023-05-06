@@ -2,6 +2,7 @@ import styles from './styles/UserList.module.css';
 import {Badge, Button, Input, Table, TableContainer, Tbody, Td, Th, Thead, Tr} from "@chakra-ui/react";
 import React from "react";
 import {DeleteIcon, EditIcon} from "@chakra-ui/icons";
+import {useNavigate} from "react-router-dom";
 
 enum Role {
   ADMIN = 'Administrator',
@@ -15,6 +16,7 @@ interface User {
 }
 
 export const UsersList = () => {
+  const navigate = useNavigate();
   const [username, setUsername] = React.useState('');
   const [users, setUsers] = React.useState<User[]>([
     {
@@ -79,7 +81,7 @@ export const UsersList = () => {
                   }
                 })}</Td>
               <Td>
-                <EditIcon className={styles.editIcon} />
+                <EditIcon className={styles.editIcon} onClick={() => navigate('/admin/users/1')} />
                 <DeleteIcon className={styles.deleteIcon} onClick={() => deleteUser(index)} />
               </Td>
             </Tr>

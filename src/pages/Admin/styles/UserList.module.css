@@ -51,3 +51,16 @@
 .addButton:hover {
     background: #488d9e !important;
 }
+
+.label {
+    @apply text-xl font-bold mb-2;
+}
+
+.pInput {
+    @apply rounded-lg px-4 py-2 mb-2 !important;
+    background: #E9F0F2 !important;
+}
+
+.lastActivities {
+    @apply flex flex-col;
+}

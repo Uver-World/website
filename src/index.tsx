@@ -11,6 +11,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import {UsersList} from "./pages/Admin/UsersList";
 import {ChakraProvider} from "@chakra-ui/react";
+import {UserEdit} from "./pages/Admin/UserEdit";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -25,17 +26,18 @@ root.render(
           background: "#D4DCDE"
         }}>
           <Routes>
-            <Route path="/" element={<Home />}>
-              <Route index element={<Home />} />
-            </Route>
+            <Route path="/" element={<Home />}/>
             <Route path="download">
               <Route path="thanks" element={<Thanks />} />
               <Route index element={<Download />} />
             </Route>
             <Route path="about" element={<About />}/>
             <Route path="contact" element={<Contact />}/>
-            <Route path="admin" element={<UsersList/>}>
-              <Route index element={<UsersList/>} />
+            <Route path="admin">
+              <Route path="users">
+                <Route index element={<UsersList/>}/>
+                <Route path="1" element={<UserEdit/>} />
+              </Route>
             </Route>
           </Routes>
         </main>

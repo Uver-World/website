@@ -1,7 +1,6 @@
 import styles from "../styles/index.module.css";
 
 import React, {FunctionComponent} from "react";
-import {useNavigate} from "react-router-dom";
 
 type CardProps = {
   title: string;
