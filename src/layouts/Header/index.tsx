@@ -44,6 +44,7 @@ const Header = () => {
         <div className={styles.centerSection}>
           <Link to="/">Accueil</Link>
           <Link to="/about">À propos</Link>
+          <Link to="/prices">Tarifs</Link>
           <Link to="/contact">Contactez-nous</Link>
         </div>
         {/*<div className={styles.rightSection}>*/}
