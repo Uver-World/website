@@ -11,8 +11,11 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import {UsersList} from "./pages/Admin/UsersList";
 import {OrganisationList} from "./pages/Admin/OrganisationList";
+import {OrganisationEdit} from "./pages/Admin/OrganisationEdit";
 import {ChakraProvider} from "@chakra-ui/react";
 import {UserEdit} from "./pages/Admin/UserEdit";
+import {PricesList} from "./pages/Prices/PricesList"
+import Prices from "./pages/Prices";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -41,8 +44,13 @@ root.render(
               </Route>
               <Route path="organisations">
                 <Route index element={<OrganisationList/>}/>
-                <Route path="1" element={<UserEdit/>} />
+                <Route path="1" element={<OrganisationEdit/>} />
               </Route>
+            </Route>
+            <Route path="prices">
+              <Route index element={<Prices/>} />
+              <Route path="1" element={<PricesList/>} />
+              <Route path="1" element={<PricesList/>} />
             </Route>
           </Routes>
         </main>

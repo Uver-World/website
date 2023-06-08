@@ -1,6 +1,76 @@
 .container {
+    @apply max-w-5xl mx-auto py-24;
+}
+
+.text {
+    @apply text-justify mb-6;
+}
+
+.title {
+    @apply text-2xl font-bold mb-3;
+}
+
+.subtitle {
+    @apply text-lg font-bold mb-3;
+}
+
+.hero {
+    @apply w-full h-72 object-cover object-center bg-slate-900 text-white flex flex-col justify-center items-center overflow-hidden relative;
+}
+
+.hero h1 {
+    @apply text-5xl font-bold text-center z-10;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.hero span {
+    @apply text-xl text-center uppercase mb-4 z-10;
+}
+
+.team {
+    @apply rounded-2xl shadow-2xl;
+}
+
+.link {
+    @apply underline inline-block;
+}
+
+.card {
+    @apply rounded-xl shadow-xl;
+    background: #E9F0F2;
+}
+
+.cardTitle {
+    @apply text-2xl font-bold pt-8 pb-3 text-center;
+}
+
+.cardDescription {
+    @apply text-center pb-8;
+}
+
+.cardFeature {
+    @apply my-4 mx-8 py-3 px-6 rounded-lg flex justify-between items-center;
     background: #D4DCDE;
-    @apply px-4 py-2;
+}
+
+.cardFeatureIcon {
+    color: #0ABC51;
+}
+
+.cardPrice {
+    @apply text-2xl font-bold py-8 flex justify-center items-center;
+}
+
+.cardPriceNumber {
+    @apply mr-2;
+}
+
+.cardPriceButton {
+    @apply ml-2;
+}
+
+.prices {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-8 mt-12;
 }
 
 .title {
@@ -12,7 +82,7 @@
 }
 
 .editIcon {
-    @apply text-xl cursor-pointer duration-300;
+    @apply text-xl cursor-pointer duration-300 mr-2;
     color: #62B6CB !important;
 }
 
@@ -45,7 +115,7 @@
 .addButton {
     background: #62B6CB !important;
     color: #fff;
-    @apply rounded-full px-8 duration-300 !important;
+    @apply rounded-full px-8 duration-300 w-full;
 }
 
 .addButton:hover {
