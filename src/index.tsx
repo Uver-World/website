@@ -9,6 +9,7 @@ import Download from "./pages/Download";
 import Thanks from "./pages/Download/Thanks";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import Profile from "./pages/Profile";
 import {UsersList} from "./pages/Admin/UsersList";
 import {OrganisationList} from "./pages/Admin/OrganisationList";
 import {OrganisationEdit} from "./pages/Admin/OrganisationEdit";
@@ -16,6 +17,7 @@ import {ChakraProvider} from "@chakra-ui/react";
 import {UserEdit} from "./pages/Admin/UserEdit";
 import {PricesList} from "./pages/Prices/PricesList"
 import Prices from "./pages/Prices";
+import Dashboard from './pages/dashboard';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -37,6 +39,8 @@ root.render(
             </Route>
             <Route path="about" element={<About />}/>
             <Route path="contact" element={<Contact />}/>
+            <Route path="profile" element={<Profile />}/>
+            <Route path="dashboard" element={<Dashboard />}/>
             <Route path="admin">
               <Route path="users">
                 <Route index element={<UsersList/>}/>

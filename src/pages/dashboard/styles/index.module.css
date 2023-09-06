@@ -1,0 +1,124 @@
+.container {
+    @apply max-w-screen-2xl mx-auto py-24;
+}
+
+.profileContainer {
+    text-align: center;
+    @apply text-2xl font-bold mb-3;
+    font-weight: bold;
+}
+
+.text {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 75px;
+}
+
+.table {
+    @apply max-w-4xl my-12 mx-auto;
+}
+
+.title {
+    @apply text-7xl font-bold mb-3;
+}
+
+.subtitle {
+    @apply text-lg font-bold mb-3;
+}
+
+.hero {
+    @apply w-full h-72 object-cover object-center bg-slate-900 text-white flex flex-col justify-center items-center overflow-hidden relative;
+}
+
+.hero h1 {
+    @apply text-5xl font-bold text-center z-10;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.hero span {
+    @apply text-xl text-center uppercase mb-4 z-10;
+}
+
+.team {
+    display: inline-block;
+    position: relative;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 50%;
+  
+    margin-bottom: 75px;
+}
+
+
+.additionalText {
+    font-weight: bold;
+    font-size: large;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+
+.pInput {
+    @apply rounded-lg px-4 py-2 mb-2 !important;
+    background: #E9F0F2 !important;
+}
+
+.pOrgaInput {
+    @apply rounded-lg px-4 py-2 mb-2 mt-2 !important;
+    background: #E9F0F2 !important;
+}
+
+
+.button {
+    background: #62B6CB !important;
+    color: #fff;
+    @apply rounded-full px-8 duration-300 !important;
+    margin-top: 10px;
+}
+
+.addOrganisationUserInput {
+    @apply w-full rounded-lg !important;
+    background: #E9F0F2 !important;
+
+}
+
+.addOrganisationContainer {
+    @apply flex justify-end w-full mx-auto;
+
+}
+
+.labelCenter {
+    @apply text-xl font-bold mb-2 text-center;
+}
+
+.labelMargin {
+    @apply text-xl font-bold mb-2 mt-32;
+}
+
+.label {
+    @apply text-xl font-bold mb-2;
+}
+
+.pOrganisationInput {
+    @apply rounded-lg px-4 py-2 mb-2 my-4;
+    background: #E9F0F2 !important;
+    max-width: max-content;
+}
+
+.leftAlignedButton {
+    text-align: left;
+}
+
+.pCollaboratorsInput {
+    @apply rounded-lg px-4 py-2 mb-2 mt-2 !important;
+    background: #E9F0F2 !important;
+    height: 140px;
+    width: 400px;
+}
+
+.sh {
+    font-weight:900;
+    margin-bottom: 25px;
+    font-size: large;
+}

@@ -46,6 +46,8 @@ const Header = () => {
           <Link to="/about">À propos</Link>
           <Link to="/prices">Tarifs</Link>
           <Link to="/contact">Contactez-nous</Link>
+          <Link to="/dashboard">Dashboard</Link>
+          <Link to="/profile">Profil</Link>
         </div>
         {/*<div className={styles.rightSection}>*/}
           {/*<button onClick={() => toggleDarkMode()} className={`${styles.button} dark:hover:bg-slate-500`}>*/}
