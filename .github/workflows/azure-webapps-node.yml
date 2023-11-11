@@ -48,6 +48,15 @@ jobs:
       with:
         name: node-app
 
+    - name: Copy zip to VPS
+      uses: appleboy/scp-action@master
+      with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          source: ./build.zip
+          target: ~/build.zip
 
     # Deploy the previous build to VPS server
     - name: Deploy to VPS
@@ -62,5 +71,6 @@ jobs:
           mkdir -p website
           cd website
           rm -rf *
-          unzip -o ../node-app.zip
-          rm -rf ../node-app.zip
+          unzip ~/build.zip -d .
+          rm ~/build.zip
+        
