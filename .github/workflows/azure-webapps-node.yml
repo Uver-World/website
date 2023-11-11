@@ -64,4 +64,3 @@ jobs:
           rm -rf *
           unzip -o ../node-app.zip
           rm -rf ../node-app.zip
-          pm2 restart website
