@@ -15,25 +15,26 @@ interface User {
   role: Role[]
 }
 
+const users: User[] = [
+  {
+    name: 'Forfait epitech 10k/an',
+    email: 'arnaque',
+    role: [Role.ADMIN]
+  },
+  {
+    name: '42',
+    email: 'gratuit',
+    role: [Role.USER]
+  },
+  {
+    name: 'MSC',
+    email: 'cest manu qui régale',
+    role: [Role.ADMIN, Role.USER]
+  },
+];
+
 export const PricesList = () => {
   const navigate = useNavigate();
-  const [users, setUsers] = React.useState<User[]>([
-    {
-      name: 'Forfait epitech 10k/an',
-      email: 'arnaque',
-      role: [Role.ADMIN]
-    },
-    {
-      name: '42',
-      email: 'gratuit',
-      role: [Role.USER]
-    },
-    {
-      name: 'MSC',
-      email: 'cest manu qui régale',
-      role: [Role.ADMIN, Role.USER]
-    },
-  ]);
 
   return (
   <div className={styles.container}>

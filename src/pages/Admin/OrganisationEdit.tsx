@@ -23,14 +23,15 @@ interface User {
     role: Role[]
 }
 
+const organisation: Organisation = {
+  ownerName: 'matthew',
+  ownerEmail: 'clement.ozor@epitech.eu',
+  name: 'UverWorld',
+  email: 'john.doe@gmail.com',
+  role: [Role.ADMIN]
+}
+
 export const OrganisationEdit = () => {
-  const [organisation, setUser] = React.useState<Organisation>({
-      ownerName: 'matthew',
-      ownerEmail: 'clement.ozor@epitech.eu',
-      name: 'UverWorld',
-      email: 'john.doe@gmail.com',
-      role: [Role.ADMIN]
-    });
     const [username, setUsername] = React.useState('');
     const navigate = useNavigate();
     const [organisationUser, setOrganisationUsers] = React.useState<User[]>([

@@ -13,13 +13,13 @@ interface User {
   role: Role[]
 }
 
-export const UserEdit = () => {
-  const [user, setUser] = React.useState<User>({
-      name: 'John Doe',
-      email: 'john.doe@gmail.com',
-      role: [Role.ADMIN]
-    });
+const user: User = {
+  name: 'John Doe',
+  email: 'john.doe@gmail.com',
+  role: [Role.ADMIN]
+}
 
+export const UserEdit = () => {
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>{user.name}</h1>
