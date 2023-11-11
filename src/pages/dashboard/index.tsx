@@ -1,24 +1,7 @@
 import styles from './styles/index.module.css';
-import team from '../../assets/img/team.jpg'
-import {
-  Badge,
-  Box,
-  Button,
-  Center,
-  Input,
-  Select,
-  SimpleGrid,
-  Table,
-  TableContainer,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr
-} from "@chakra-ui/react";
+import {Box, Button, SimpleGrid} from "@chakra-ui/react";
 import React from "react";
-import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
-import { Link, useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 const Dashboard = () => {
   const navigate = useNavigate();

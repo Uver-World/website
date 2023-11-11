@@ -1,7 +1,7 @@
 import styles from './styles/index.module.css';
-import {Badge, Button, Input, Table, TableContainer, Tbody, Td, Th, Thead, Tr} from "@chakra-ui/react";
+import {Button, Table, TableContainer, Tbody, Td, Th, Thead, Tr} from "@chakra-ui/react";
 import React from "react";
-import {ChatIcon, CopyIcon, DeleteIcon, EditIcon, HamburgerIcon} from "@chakra-ui/icons";
+import {CopyIcon, HamburgerIcon} from "@chakra-ui/icons";
 import {useNavigate} from "react-router-dom";
 
 enum Role {
@@ -17,7 +17,6 @@ interface User {
 
 export const PricesList = () => {
   const navigate = useNavigate();
-  const [username, setUsername] = React.useState('');
   const [users, setUsers] = React.useState<User[]>([
     {
       name: 'Forfait epitech 10k/an',
@@ -35,20 +34,6 @@ export const PricesList = () => {
       role: [Role.ADMIN, Role.USER]
     },
   ]);
-
-  const addUser = () => {
-    setUsers([...users, {
-      name: username,
-      email: `${username}@gmail.com`,
-      role: [Role.USER]
-    }]);
-  }
-
-  const deleteUser = (index: number) => {
-    const newUsers = [...users];
-    newUsers.splice(index, 1);
-    setUsers(newUsers);
-  }
 
   return (
   <div className={styles.container}>

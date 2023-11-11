@@ -1,19 +1,5 @@
 import styles from './styles/UserList.module.css';
-import {
-  Badge,
-  Box,
-  Button,
-  Input,
-  Select,
-  SimpleGrid,
-  Table,
-  TableContainer,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr
-} from "@chakra-ui/react";
+import {Badge, Box, Button, Input, SimpleGrid, Table, Tbody, Td, Th, Thead, Tr} from "@chakra-ui/react";
 import React from "react";
 import {DeleteIcon, EditIcon} from "@chakra-ui/icons";
 import {useNavigate} from "react-router-dom";
