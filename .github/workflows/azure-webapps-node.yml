@@ -38,3 +38,13 @@ jobs:
         port: ${{ secrets.PORT }}
         source: website
         target: ~/
+
+    - name: SSH to VPS
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        port: ${{ secrets.PORT }}
+        script: |
+          pm2 restart website
