@@ -3,52 +3,80 @@ import {Badge, Button, Input, Table, TableContainer, Tbody, Td, Th, Thead, Tr} f
 import React from "react";
 import {DeleteIcon, EditIcon} from "@chakra-ui/icons";
 import {useNavigate} from "react-router-dom";
+import {useEffect} from "react";
+import {getOrganizations, loginWithID, loginWithToken} from "../../api/users";
 
 enum Role {
   ADMIN = 'Administrator',
   USER = 'User'
 }
 
-interface User {
+interface Organisation {
+  creation_date: string,
+  member_ids: [],
   name: string,
-  email: string,
-  role: Role[]
+  owner_id: string,
+  projects_ids: [],
+  server_ids: [],
+  unique_id: string
+}
+
+interface User {
+  username: string,
+  unique_id: string,
+  logins: [],
+  group: string,
+  authentication: {
+    Credentials: {
+      email: string,
+      password: string
+    }
+  },
+  creation_date: string,
 }
 
 export const UsersList = () => {
   const navigate = useNavigate();
   const [username, setUsername] = React.useState('');
-  const [users, setUsers] = React.useState<User[]>([
-    {
-      name: 'John Doe',
-      email: 'john.doe@gmail.com',
-      role: [Role.ADMIN]
-    },
-    {
-      name: 'Jane Doe',
-      email: 'jane.doe@gmail.com',
-      role: [Role.USER]
-    },
-    {
-      name: 'John Doe',
-      email: 'john.doe@gmail.com',
-      role: [Role.ADMIN, Role.USER]
-    },
-  ]);
+  const [orgId, setOrgId] = React.useState('');
+  const [users, setUsers] = React.useState<User[]>([]);
+  const [user, setUser] = React.useState<User>();
+  const [organisations, setOrganisations] = React.useState<Organisation[]>([]);
 
-  const addUser = () => {
-    setUsers([...users, {
-      name: username,
-      email: `${username}@gmail.com`,
-      role: [Role.USER]
-    }]);
-  }
+  useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      navigate('/login')
+    }
 
-  const deleteUser = (index: number) => {
-    const newUsers = [...users];
-    newUsers.splice(index, 1);
-    setUsers(newUsers);
-  }
+    const getUser = async () => {
+      const user = await loginWithToken(localStorage.getItem('token') || '');
+      
+      if (user.data.code && user.data.code !== 200) {
+        alert(user.data.message)
+        navigate('/login')
+      }
+      
+      setUser(user.data)
+      getOrgs(user.data.unique_id)
+    }
+
+    const getOrgs = async (id: string) => {
+      const orgs = await getOrganizations(id, localStorage.getItem('token') || '');
+      setOrganisations(orgs.data)
+      getMembers(orgs.data)
+    }
+
+    const getMembers = async (orgs: Organisation[]) => {
+      orgs.forEach(async (org) => {
+        org.member_ids.forEach(async (member) => {
+          const user = await loginWithID(member);
+          setUsers([...users, user.data])
+        })
+      })
+    }
+
+    getUser()
+  }, [])
 
   return (
   <div className={styles.container}>
@@ -59,7 +87,7 @@ export const UsersList = () => {
         <Thead>
           <Tr>
             <Th>Username</Th>
-            <Th>Roles</Th>
+            <Th>Organisations</Th>
             <Th>Actions</Th>
           </Tr>
         </Thead>
@@ -67,33 +95,24 @@ export const UsersList = () => {
           {users.map((user, index) => (
             <Tr key={index}>
               <Td>
-                { user.role.includes(Role.ADMIN) ?
-                  <Badge colorScheme="green" className={styles.badge}>Admin</Badge> :
-                  <Badge colorScheme="blue" className={styles.badge}>User</Badge>}
-                {user.name}
+                  <Badge colorScheme="blue" className={styles.badge}>{user.group}</Badge>
+                {user.username}
               </Td>
               <Td>{
-                user.role.map((role, index) => {
-                  if (index === 0) {
-                    return role;
-                  } else {
-                    return `, ${role.toLowerCase()}`;
+                organisations.map((org) => {
+                  if (org.member_ids.includes(user.unique_id as never)) {
+                    return org.name
                   }
-                })}</Td>
+                })
+                }</Td>
               <Td>
-                <EditIcon className={styles.editIcon} onClick={() => navigate('/admin/users/1')} />
-                <DeleteIcon className={styles.deleteIcon} onClick={() => deleteUser(index)} />
+                <EditIcon className={styles.editIcon} onClick={() => navigate(`/admin/users/${user.unique_id}`)} />
               </Td>
             </Tr>
           ))}
         </Tbody>
       </Table>
     </TableContainer>
-
-    <div className={styles.addContainer}>
-      <Input placeholder='Add new collaborator' className={styles.addInput} onChange={(e) => setUsername(e.target.value)} />
-      <Button className={styles.addButton} onClick={addUser}>Add</Button>
-    </div>
   </div>
   )
 }

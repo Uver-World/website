@@ -1,10 +1,48 @@
 import styles from './styles/index.module.css';
 import {Box, Button, SimpleGrid} from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {useNavigate} from "react-router-dom";
+import { getOrganizations, loginWithToken } from '../../api/users';
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const [user, setUser] = useState({});
+  const [orgsLength, setOrgsLength] = useState(0);
+  const [membersLength, setMembersLength] = useState(0);
+
+  useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      navigate('/login')
+    }
+
+    const getUser = async () => {
+      const user = await loginWithToken(localStorage.getItem('token') || '');
+      
+      if (user.data.code && user.data.code !== 200) {
+        alert(user.data.message)
+        navigate('/login')
+      }
+      
+      setUser(user.data)
+      getOrgs(user.data.unique_id)
+    }
+
+    const getOrgs = async (id: string) => {
+      const orgs = await getOrganizations(id, localStorage.getItem('token') || '')
+
+      setOrgsLength(orgs.data.length)
+
+      let members = 0;
+
+      orgs.data.forEach((org: any) => {
+        members += org.member_ids.length
+      })
+
+      setMembersLength(members)
+    }
+
+    getUser()
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -14,7 +52,7 @@ const Dashboard = () => {
             <div className={styles.pCollaboratorsInput}>
 
           <p className={styles.sh}> Organisations </p>
-          <p className={styles.title}>4</p>
+          <p className={styles.title}>{orgsLength}</p>
             </div>
           <p className={styles.additionalText}>Create</p>
           <div>
@@ -28,7 +66,7 @@ const Dashboard = () => {
             <div className={styles.pCollaboratorsInput}>
 
           <p className={styles.sh}> Collaborators </p>
-          <p className={styles.title}>37</p>
+          <p className={styles.title}>{membersLength}</p>
             </div>
           <p className={styles.additionalText}>Manage</p>
           <div>

@@ -1,70 +1,109 @@
 import styles from './styles/UserList.module.css';
 import {Badge, Box, Button, Input, SimpleGrid, Table, Tbody, Td, Th, Thead, Tr} from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import {DeleteIcon, EditIcon} from "@chakra-ui/icons";
-import {useNavigate} from "react-router-dom";
+import {Navigate, useNavigate} from "react-router-dom";
+import {useParams} from "react-router-dom";
+import {getWithID, deleteWithID} from "../../api/organization";
+import {loginWithID} from "../../api/users";
 
-enum Role {
+enum Group {
   ADMIN = 'Administrator',
-  USER = 'Organisation'
+  USER = 'User',
 }
 
 interface Organisation {
-  ownerName: string,
-  ownerEmail: string,
+  creation_date: string,
+  member_ids: [],
   name: string,
-  email: string,
-  role: Role[]
+  owner_id: string,
+  projects_ids: [],
+  server_ids: [],
+  unique_id: string
 }
 
 interface User {
-    name: string,
-    email: string,
-    role: Role[]
-}
-
-const organisation: Organisation = {
-  ownerName: 'matthew',
-  ownerEmail: 'clement.ozor@epitech.eu',
-  name: 'UverWorld',
-  email: 'john.doe@gmail.com',
-  role: [Role.ADMIN]
+  username: string,
+  unique_id: string,
+  logins: [],
+  group: string,
+  authentication: {
+    Credentials: {
+      email: string,
+      password: string
+    }
+  },
+  creation_date: string,
 }
 
 export const OrganisationEdit = () => {
+    const {id} = useParams();
     const [username, setUsername] = React.useState('');
     const navigate = useNavigate();
-    const [organisationUser, setOrganisationUsers] = React.useState<User[]>([
-        {
-          name: 'John Doe',
-          email: 'john.doe@gmail.com',
-          role: [Role.ADMIN]
-        },
-        {
-          name: 'Jane Doe',
-          email: 'jane.doe@gmail.com',
-          role: [Role.USER]
-        },
-        {
-          name: 'John Doe',
-          email: 'john.doe@gmail.com',
-          role: [Role.ADMIN, Role.USER]
-        },
-      ]);
+    const [organisation, setOrganisation] = React.useState<Organisation>();
+    const [owner, setOwner] = React.useState<User>();
+    const [members, setMembers] = React.useState<User[]>([]);
 
-      const addUser = () => {
-        setOrganisationUsers([...organisationUser, {
-          name: username,
-          email: `${username}@gmail.com`,
-          role: [Role.USER]
-        }]);
-      }
+  const addUser = () => {
+    if (!username) return;
+    setMembers([...members, {
+      username: username,
+      unique_id: '123',
+      logins: [],
+      group: Group.USER,
+      authentication: {
+        Credentials: {
+          email: '123',
+          password: '123'
+        }
+      },
+      creation_date: '123',
+    }]);
+    // TODO: Remove from API
+  }
+
+  const deleteOrganisation = () => {
+    deleteWithID(id || '');
+    navigate('/admin/organisations');
+  }
     
-      const deleteUser = (index: number) => {
-        const newUsers = [...organisationUser];
-        newUsers.splice(index, 1);
-        setOrganisationUsers(newUsers);
-      }
+  const deleteUser = (index: number) => {
+    setMembers(members.filter((_, i) => i !== index));
+    // TODO: Remove from api
+  }
+
+  useEffect(() => {
+    if (!id) navigate('/admin/organisations');
+
+    const getOrg = async () => {
+      const org = await getWithID(id || '');
+
+      setOrganisation(org.data);
+      getOwner(org.data.owner_id);
+      getMembers(org.data.member_ids);
+    }
+
+    const getOwner = async (id: string) => {
+      const owner = await loginWithID(id);
+
+      setOwner(owner.data);
+    }
+
+    const getMembers = async (ids: string[]) => {
+      const members = await Promise.all(ids.map(async (id) => {
+        const member = await loginWithID(id);
+        return member.data;
+      }));
+      
+      setMembers(members);
+    }
+
+
+    getOrg();
+  }, [])
+
+  if (!organisation || !owner)
+    return <Navigate to='/admin/organisations' />;
 
   return (
     <div className={styles.container}>
@@ -77,29 +116,24 @@ export const OrganisationEdit = () => {
         <Thead>
           <Tr>
             <Th>Username</Th>
-            <Th>Roles</Th>
+            <Th>Groups</Th>
             <Th>Actions</Th>
           </Tr>
         </Thead>
         <Tbody>
-          {organisationUser.map((user, index) => (
+          {members.map((user, index) => (
               <Tr key={index}>
               <Td>
-                { user.role.includes(Role.ADMIN) ?
+                { user.group.includes(Group.ADMIN) ?
                   <Badge colorScheme="green" className={styles.badge}>Admin</Badge> :
                   <Badge colorScheme="blue" className={styles.badge}>User</Badge>}
-                {user.name}
+                {user.username}
               </Td>
-              <Td>{
-                  user.role.map((role, index) => {
-                      if (index === 0) {
-                          return role;
-                        } else {
-                            return `, ${role.toLowerCase()}`;
-                        }
-                    })}</Td>
               <Td>
-                <EditIcon className={styles.editIcon} onClick={() => navigate('/admin/users/1')} />
+                  {user.group}
+              </Td>
+              <Td>
+                <EditIcon className={styles.editIcon} onClick={() => navigate(`/admin/users/${user.unique_id}`)} />
                 <DeleteIcon className={styles.deleteIcon} onClick={() => deleteUser(index)} />
               </Td>
             </Tr>
@@ -115,10 +149,10 @@ export const OrganisationEdit = () => {
         <Box>
           <p className={styles.label}>Organisation owner info</p>
           <p className={styles.pOrganisationInput}>
-            {organisation.ownerName}
+            {owner.username}
           </p>
           <p className={styles.pOrganisationInput}>
-            {organisation.ownerEmail}
+            {owner.authentication.Credentials.email}
           </p>
           <p className={styles.labelMargin}>Past events</p>
           <p className={styles.pOrganisationInput}>
@@ -134,7 +168,7 @@ export const OrganisationEdit = () => {
       </SimpleGrid>
 
       <div className="max-w-4xl mx-auto mt-8 flex justify-center">
-        <Button colorScheme='red' className="mt-2 mr-24">
+        <Button colorScheme='red' className="mt-2 mr-24" onClick={deleteOrganisation}>
           Delete organisation
         </Button>
         <div className="ml-24">

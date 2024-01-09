@@ -18,6 +18,8 @@ import {UserEdit} from "./pages/Admin/UserEdit";
 import {PricesList} from "./pages/Prices/PricesList"
 import Prices from "./pages/Prices";
 import Dashboard from './pages/dashboard';
+import { Register } from './pages/Register';
+import { Login } from './pages/Login';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -33,6 +35,8 @@ root.render(
         }}>
           <Routes>
             <Route path="/" element={<Home />}/>
+            <Route path="register" element={<Register/>}></Route>
+            <Route path="login" element={<Login />}/>
             <Route path="download">
               <Route path="thanks" element={<Thanks />} />
               <Route index element={<Download />} />
@@ -44,11 +48,11 @@ root.render(
             <Route path="admin">
               <Route path="users">
                 <Route index element={<UsersList/>}/>
-                <Route path="1" element={<UserEdit/>} />
+                <Route path=":id" element={<UserEdit/>} />
               </Route>
               <Route path="organisations">
                 <Route index element={<OrganisationList/>}/>
-                <Route path="1" element={<OrganisationEdit/>} />
+                <Route path=":id" element={<OrganisationEdit/>} />
               </Route>
             </Route>
             <Route path="prices">

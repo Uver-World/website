@@ -1,30 +1,73 @@
 import styles from './styles/index.module.css';
 import team from '../../assets/img/team.jpg'
 import {Box, Button, Center, SimpleGrid} from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {Link, useNavigate} from "react-router-dom";
+import { loginWithToken, getOrganizations} from '../../api/users';
 
 const Profile = () => {
   const navigate = useNavigate();
+  const [user, setUser] = useState({
+    username: '',
+    unique_id: '',
+    logins: [],
+    group: '',
+    authentication: {
+      Credentials: {
+        email: '',
+        password: ''
+      }
+    },
+    creation_date: '',
+  })
+  const [orgs, setOrgs] = useState([])
+
+  useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      navigate('/login')
+    }
+
+    const getUser = async () => {
+      const user = await loginWithToken(localStorage.getItem('token') || '');
+      
+      if (user.data.code && user.data.code !== 200) {
+        alert(user.data.message)
+        navigate('/login')
+      }
+      
+      setUser(user.data)
+      getOrgs(user.data.unique_id)
+    }
+
+    const getOrgs = async (id: string) => {
+      const orgs = await getOrganizations(id, localStorage.getItem('token') || '')
+
+      setOrgs(orgs.data)
+    }
+
+    getUser()
+  }, [])
 
   return (
     <div className={styles.container}>
       <Box mx={10}>
         <Center>
+          {/* TODO: logo */}
           <img src={team} alt="Notre équipe" className={styles.team} />
         </Center>
         <Center>
-          <h1 className={styles.title}> karim </h1>
+          <h1 className={styles.title}>{user.username}</h1>
         </Center>
         <SimpleGrid columns={3} mt={12} className='max-w-full mx-auto'>
           <Box>
             <p className={styles.additionalText}>My organisations</p>
-            <div>
-              <Button className={styles.pOrgaInput} onClick={() => navigate('/admin/organisations/1')} style={{ width: '400px' }}>Organisation 1</Button>
-            </div>
-            <div>
-              <Button className={styles.pOrgaInput} onClick={() => navigate('/admin/organisations/1')} style={{ width: '400px' }}>Organisation 2</Button>
-            </div>
+            
+            {orgs.map((org: any, index) => (
+              <div key={index}>
+                <Button className={styles.pOrgaInput} onClick={() => navigate(`/admin/organisations/${org.unique_id}`)} style={{ maxWidth: '400px' }}>{org.name}</Button>
+              </div>
+            ))}
+
             <div>
               <Link to="/admin/organisations" className='underline mt-6'>see all organisations</Link>
             </div>
@@ -33,7 +76,7 @@ const Profile = () => {
             <p className={styles.additionalText}>My informations</p>
             <p className='ml-2 mb-2 mt-4'>Email</p>
             <p className={styles.pInput}>
-              clement.ozor@epitech.eu
+              {user.authentication.Credentials.email}
             </p>
             <p className='ml-2 mt-4 mb-2'>License</p>
             <p className={styles.pInput}>
