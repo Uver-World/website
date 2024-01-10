@@ -37,7 +37,7 @@ jobs:
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
         source: website
-        target: ~/
+        target: ~/ 
 
     - name: SSH to VPS
       uses: appleboy/ssh-action@master
