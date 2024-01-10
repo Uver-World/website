@@ -1,15 +1,10 @@
 import styles from './styles/UserList.module.css';
-import {Badge, Button, Input, Table, TableContainer, Tbody, Td, Th, Thead, Tr} from "@chakra-ui/react";
+import {Badge, Table, TableContainer, Tbody, Td, Th, Thead, Tr} from "@chakra-ui/react";
 import React from "react";
-import {DeleteIcon, EditIcon} from "@chakra-ui/icons";
+import {EditIcon} from "@chakra-ui/icons";
 import {useNavigate} from "react-router-dom";
 import {useEffect} from "react";
 import {getOrganizations, loginWithID, loginWithToken} from "../../api/users";
-
-enum Role {
-  ADMIN = 'Administrator',
-  USER = 'User'
-}
 
 interface Organisation {
   creation_date: string,
@@ -37,8 +32,6 @@ interface User {
 
 export const UsersList = () => {
   const navigate = useNavigate();
-  const [username, setUsername] = React.useState('');
-  const [orgId, setOrgId] = React.useState('');
   const [users, setUsers] = React.useState<User[]>([]);
   const [user, setUser] = React.useState<User>();
   const [organisations, setOrganisations] = React.useState<Organisation[]>([]);
@@ -76,7 +69,8 @@ export const UsersList = () => {
     }
 
     getUser()
-  }, [])
+    console.log(user)
+  }, [navigate, users, user])
 
   return (
   <div className={styles.container}>
@@ -102,6 +96,8 @@ export const UsersList = () => {
                 organisations.map((org) => {
                   if (org.member_ids.includes(user.unique_id as never)) {
                     return org.name
+                  } else {
+                    return null
                   }
                 })
                 }</Td>

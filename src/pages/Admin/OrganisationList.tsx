@@ -1,15 +1,10 @@
 import styles from './styles/OrganisationList.module.css';
-import {Badge, Button, Input, Table, TableContainer, Tbody, Td, Th, Thead, Tr} from "@chakra-ui/react";
+import {Button, Input, Table, TableContainer, Tbody, Td, Th, Thead, Tr} from "@chakra-ui/react";
 import React, {useEffect, useState} from "react";
 import {DeleteIcon, EditIcon} from "@chakra-ui/icons";
 import {useNavigate} from "react-router-dom";
 import { getOrganizations, loginWithID, loginWithToken } from '../../api/users';
 import {createOrganisation, deleteWithID } from '../../api/organization';
-
-enum Role {
-  ADMIN = 'Administrator',
-  organisation = 'organisation'
-}
 
 interface Organisation {
   creation_date: string,
@@ -76,7 +71,7 @@ export const OrganisationList = () => {
       setowners(owners)
     }
     getUser()
-  }, []);
+  }, [navigate]);
 
   const deleteorganisation = async (index: number) => {
     const neworganisations = [...organisations];

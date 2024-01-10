@@ -1,7 +1,6 @@
 import { useState } from "react"
 import { renewToken } from "../../api/users"
 import { useNavigate } from "react-router-dom"
-import { log } from "console"
 
 export const Login = () => {
     const [email, setEmail] = useState('')
@@ -11,7 +10,7 @@ export const Login = () => {
     const handleLogin = async () => {
         const token = await renewToken(email, password)
 
-        if (token.data && token.data.code && token.data.code != 200) {
+        if (token.data && token.data.code && token.data.code !== 200) {
             alert(token.data.message)
         } else {
             localStorage.setItem('token', token.data)

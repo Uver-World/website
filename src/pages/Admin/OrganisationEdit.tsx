@@ -2,7 +2,7 @@ import styles from './styles/UserList.module.css';
 import {Badge, Box, Button, Input, SimpleGrid, Table, Tbody, Td, Th, Thead, Tr} from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import {DeleteIcon, EditIcon} from "@chakra-ui/icons";
-import {Navigate, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {useParams} from "react-router-dom";
 import {getWithID, deleteWithID} from "../../api/organization";
 import {loginWithID} from "../../api/users";
@@ -100,10 +100,10 @@ export const OrganisationEdit = () => {
 
 
     getOrg();
-  }, [])
+  }, [id, navigate])
 
   if (!organisation || !owner)
-    return <Navigate to='/admin/organisations' />;
+    return <>Error</>;
 
   return (
     <div className={styles.container}>

@@ -42,7 +42,7 @@ const Dashboard = () => {
     }
 
     getUser()
-  }, []);
+  }, [user, navigate]);
 
   return (
     <div className={styles.container}>

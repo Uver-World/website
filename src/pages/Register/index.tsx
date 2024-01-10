@@ -10,7 +10,7 @@ export const Register = () => {
     const handleRegister = async () => {
         const token = await registerUser(email, password)
 
-        if (token.data && token.data.code && token.data.code != 200) {
+        if (token.data && token.data.code && token.data.code !== 200) {
             alert(token.data.message)
         } else {
             localStorage.setItem('token', token.data.token)

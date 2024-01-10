@@ -46,7 +46,7 @@ const Profile = () => {
     }
 
     getUser()
-  }, [])
+  }, [navigate])
 
   return (
     <div className={styles.container}>

@@ -1,7 +1,7 @@
 import styles from './styles/UserList.module.css';
 import {Box, Button, Select, SimpleGrid} from "@chakra-ui/react";
 import React, { useEffect } from "react";
-import {Navigate, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {loginWithID} from "../../api/users";
 
 enum Role {
@@ -36,7 +36,7 @@ export const UserEdit = () => {
     }
 
     getUser()
-  }, [])
+  }, [id])
 
 
   if (!user) return <>error</>
