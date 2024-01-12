@@ -1,7 +1,7 @@
 import axios, { AxiosResponse} from 'axios';
 
 const API_URL = process.env.REACT_APP_API_URL;
-const TOKEN = 'qFcO6cNYJxSfS8SsHiE2HY5aKlSVUjs3';
+const TOKEN = process.env.REACT_APP_API_TOKEN;
 
 export const registerUser = async (email: string, password: string): Promise<AxiosResponse> => {
   try {
