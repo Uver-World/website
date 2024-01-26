@@ -69,8 +69,7 @@ export const UsersList = () => {
     }
 
     getUser()
-    console.log(user)
-  }, [navigate, users, user])
+  }, [navigate])
 
   return (
   <div className={styles.container}>
