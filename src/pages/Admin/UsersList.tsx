@@ -58,12 +58,12 @@ export const UsersList = () => {
     }
 
     const getMembers = async (orgs: Organisation[]) => {
-      orgs.forEach(async (org) => {
-        org.member_ids.forEach(async (member) => {
+      for (const org of orgs) {
+        for (const member of org.member_ids) {
           const user = await loginWithID(member);
-          setUsers([...users, user.data])
-        })
-      })
+          setUsers((users) => [...users, user.data])
+        }
+      }
     }
 
     getUser()
