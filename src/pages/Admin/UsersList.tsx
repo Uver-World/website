@@ -33,7 +33,6 @@ interface User {
 export const UsersList = () => {
   const navigate = useNavigate();
   const [users, setUsers] = React.useState<User[]>([]);
-  const [user, setUser] = React.useState<User>();
   const [organisations, setOrganisations] = React.useState<Organisation[]>([]);
 
   useEffect(() => {
@@ -48,8 +47,7 @@ export const UsersList = () => {
         alert(user.data.message)
         navigate('/login')
       }
-      
-      setUser(user.data)
+
       getOrgs(user.data.unique_id)
     }
 
@@ -69,8 +67,7 @@ export const UsersList = () => {
     }
 
     getUser()
-    console.log(users)
-  }, [navigate])
+  }, [navigate, users])
 
   return (
   <div className={styles.container}>
