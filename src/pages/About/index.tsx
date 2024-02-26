@@ -1,6 +1,7 @@
 import styles from './styles/index.module.css'
 import team from '../../assets/img/team.jpg'
 import SolarSystem from "../../components/SolarSystem";
+import { TimeLine } from './timeline';
 
 const About = () => {
   return (
@@ -21,6 +22,10 @@ const About = () => {
         <p className={styles.text}>
           Un logiciel modulable permettant de créer des simulations sur mesure par l'utilisateur sans intervention de la part d'un expert. L'utilisateur pourra simplement créer son propre logiciel de simulation à travers un système de nœuds permettant de moduler son outil sans aide de connaissances techniques. Dans le cas où l'utilisateur saurait programmer, il pourra même modifier ces nœuds en y ajoutant son propre code rendant sa solution encore plus personnalisable à travers l'utilisation du langage Python.
         </p>
+
+        <h2 className={styles.title}>Timeline du projet</h2>
+        
+        <TimeLine />
 
         <h2 className={styles.title}>Notre équipe</h2>
 
