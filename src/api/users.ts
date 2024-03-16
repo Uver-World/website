@@ -3,13 +3,14 @@ import axios, { AxiosResponse} from 'axios';
 const API_URL = process.env.REACT_APP_API_URL;
 const TOKEN = process.env.REACT_APP_API_TOKEN;
 
-export const registerUser = async (email: string, password: string): Promise<AxiosResponse> => {
+export const registerUser = async (email: string, password: string, username: string): Promise<AxiosResponse> => {
   try {
     const response = await axios.post(
       `${API_URL}/user/register`,
       {
         Credentials: {
           email,
+          username,
           password
         }
       },
@@ -33,11 +34,13 @@ export const registerUser = async (email: string, password: string): Promise<Axi
 
 export const renewToken = async (email: string, password: string): Promise<AxiosResponse> => {
   try {
+    const username = "jacques"
     const response = await axios.post(
       `${API_URL}/user/renew`,
       {
         Credentials: {
           email,
+          username,
           password
         }
       },
