@@ -30,7 +30,8 @@ interface User {
   authentication: {
     Credentials: {
       email: string,
-      password: string
+      password: string,
+      username: string | undefined
     }
   },
   creation_date: string,
@@ -54,7 +55,8 @@ export const OrganisationEdit = () => {
       authentication: {
         Credentials: {
           email: '123',
-          password: '123'
+          password: '123', 
+          username: '123'
         }
       },
       creation_date: '123',
@@ -149,7 +151,7 @@ export const OrganisationEdit = () => {
         <Box>
           <p className={styles.label}>Organisation owner info</p>
           <p className={styles.pOrganisationInput}>
-            {owner.username}
+            {owner.authentication.Credentials.username}
           </p>
           <p className={styles.pOrganisationInput}>
             {owner.authentication.Credentials.email}

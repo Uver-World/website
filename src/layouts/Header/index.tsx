@@ -8,6 +8,7 @@ const Header = () => {
 
   useEffect(() => {
     const checkToken = () => {
+      console.log(localStorage.getItem('tokenDate'));
       if (localStorage.getItem('token')) {
         setIsLogged(true);
       } else {
@@ -27,10 +28,10 @@ const Header = () => {
         <div className={styles.centerSection}>
           <Link to="/">Accueil</Link>
           <Link to="/about">À propos</Link>
-          <Link to="/prices">Tarifs</Link>
-          <Link to="/contact">Contactez-nous</Link>
           {isLogged ? (
             <>
+              <Link to="/prices">Tarifs</Link>
+              <Link to="/contact">Contactez-nous</Link>
               <Link to="/dashboard">Dashboard</Link>
               <Link to="/profile">Profil</Link>
               <span
@@ -46,6 +47,8 @@ const Header = () => {
             </>
           ) : (
             <>
+              <Link to="/login">Tarifs</Link>
+              <Link to="/login">Contactez-nous</Link>
               <Link to="/register">Inscription</Link>
               <Link to="/login">Connexion</Link>
             </>

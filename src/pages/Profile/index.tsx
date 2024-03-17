@@ -40,6 +40,8 @@ const Profile = () => {
     }
 
     const getOrgs = async (id: string) => {
+      console.log(id);
+      console.log(localStorage.getItem('token'));
       const orgs = await getOrganizations(id, localStorage.getItem('token') || '')
 
       setOrgs(orgs.data)
