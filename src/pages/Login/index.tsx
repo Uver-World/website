@@ -16,10 +16,13 @@ export const Login = () => {
         const token = await renewToken(email, password)
 
         if (token.data && token.data.code && token.data.code !== 200) {
-            alert(token.data.message)
+            alert(token.data.message);
         } else {
-            localStorage.setItem('token', token.data)
-            navigate('/profile')
+            const currentDate = new Date().toISOString();
+            localStorage.setItem('token', token.data);
+            localStorage.setItem('tokenDate', currentDate);
+            navigate('/profile');
+            window.location.reload();
         }
     }
 
