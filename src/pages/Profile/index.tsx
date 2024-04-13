@@ -14,9 +14,10 @@ const Profile = () => {
     group: "",
     authentication: {
       Credentials: {
-        email: "",
-        password: "",
-      },
+        email: '',
+        password: '',
+        username: ''
+      }
     },
     creation_date: "",
   });
@@ -59,7 +60,7 @@ const Profile = () => {
           <img src={team} alt="Notre équipe" className={styles.team} />
         </Center>
         <Center>
-          <h1 className={styles.title}>{user.username}</h1>
+          <h1 className={styles.title}>{user.authentication.Credentials.username}</h1>
         </Center>
         <SimpleGrid columns={3} mt={12} className="max-w-full mx-auto">
           <Box>
