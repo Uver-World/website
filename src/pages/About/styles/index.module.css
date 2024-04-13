@@ -1,32 +1,32 @@
 .container {
-    @apply max-w-5xl mx-auto py-24;
+  @apply max-w-5xl py-24 mx-auto;
 }
 
 .text {
-    @apply text-justify mb-6;
+  @apply mb-6 text-justify;
 }
 
 .title {
-    @apply text-2xl font-bold mb-3;
+  @apply mb-3 text-2xl font-bold text-center;
 }
 
 .subtitle {
-    @apply text-lg font-bold mb-3;
+  @apply mb-3 text-lg font-bold;
 }
 
 .hero {
-    @apply w-full h-72 object-cover object-center bg-slate-900 text-white flex flex-col justify-center items-center overflow-hidden relative;
+  @apply relative flex flex-col items-center justify-center object-cover object-center w-full overflow-hidden text-white h-72 bg-slate-900;
 }
 
 .hero h1 {
-    @apply text-5xl font-bold text-center z-10;
-    font-family: 'Montserrat', sans-serif;
+  @apply z-10 text-5xl font-bold text-center;
+  font-family: "Montserrat", sans-serif;
 }
 
 .hero span {
-    @apply text-xl text-center uppercase mb-4 z-10;
+  @apply z-10 mb-4 text-xl text-center uppercase;
 }
 
 .team {
-    @apply rounded-2xl shadow-2xl;
+  @apply object-cover w-48 h-48 text-center rounded-full shadow-lg;
 }

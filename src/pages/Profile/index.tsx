@@ -1,17 +1,17 @@
-import styles from './styles/index.module.css';
-import team from '../../assets/img/team.jpg'
-import {Box, Button, Center, SimpleGrid} from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
-import {Link, useNavigate} from "react-router-dom";
-import { loginWithToken, getOrganizations} from '../../api/users';
+import { Box, Button, Center, SimpleGrid } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { getOrganizations, loginWithToken } from "../../api/users";
+import team from "../../assets/img/team.jpg";
+import styles from "./styles/index.module.css";
 
 const Profile = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState({
-    username: '',
-    unique_id: '',
+    username: "",
+    unique_id: "",
     logins: [],
-    group: '',
+    group: "",
     authentication: {
       Credentials: {
         email: '',
@@ -19,37 +19,38 @@ const Profile = () => {
         username: ''
       }
     },
-    creation_date: '',
-  })
-  const [orgs, setOrgs] = useState([])
+    creation_date: "",
+  });
+  const [orgs, setOrgs] = useState([]);
 
   useEffect(() => {
-    if (!localStorage.getItem('token')) {
-      navigate('/login')
+    if (!localStorage.getItem("token")) {
+      navigate("/login");
     }
 
     const getUser = async () => {
-      const user = await loginWithToken(localStorage.getItem('token') || '');
+      const user = await loginWithToken(localStorage.getItem("token") || "");
 
       if (user.data.code && user.data.code !== 200) {
-        alert(user.data.message)
-        navigate('/login')
+        alert(user.data.message);
+        navigate("/login");
       }
-      
-      setUser(user.data)
-      getOrgs(user.data.unique_id)
-    }
+
+      setUser(user.data);
+      getOrgs(user.data.unique_id);
+    };
 
     const getOrgs = async (id: string) => {
-      console.log(id);
-      console.log(localStorage.getItem('token'));
-      const orgs = await getOrganizations(id, localStorage.getItem('token') || '')
+      const orgs = await getOrganizations(
+        id,
+        localStorage.getItem("token") || ""
+      );
 
-      setOrgs(orgs.data)
-    }
+      setOrgs(orgs.data);
+    };
 
-    getUser()
-  }, [navigate])
+    getUser();
+  }, [navigate]);
 
   return (
     <div className={styles.container}>
@@ -61,30 +62,38 @@ const Profile = () => {
         <Center>
           <h1 className={styles.title}>{user.authentication.Credentials.username}</h1>
         </Center>
-        <SimpleGrid columns={3} mt={12} className='max-w-full mx-auto'>
+        <SimpleGrid columns={3} mt={12} className="max-w-full mx-auto">
           <Box>
             <p className={styles.additionalText}>My organisations</p>
-            
+
             {orgs.map((org: any, index) => (
               <div key={index}>
-                <Button className={styles.pOrgaInput} onClick={() => navigate(`/admin/organisations/${org.unique_id}`)} style={{ maxWidth: '400px' }}>{org.name}</Button>
+                <Button
+                  className={styles.pOrgaInput}
+                  onClick={() =>
+                    navigate(`/admin/organisations/${org.unique_id}`)
+                  }
+                  style={{ maxWidth: "400px" }}
+                >
+                  {org.name}
+                </Button>
               </div>
             ))}
 
             <div>
-              <Link to="/admin/organisations" className='underline mt-6'>see all organisations</Link>
+              <Link to="/admin/organisations" className="mt-6 underline">
+                see all organisations
+              </Link>
             </div>
           </Box>
           <Box>
             <p className={styles.additionalText}>My informations</p>
-            <p className='ml-2 mb-2 mt-4'>Email</p>
+            <p className="mt-4 mb-2 ml-2">Email</p>
             <p className={styles.pInput}>
               {user.authentication.Credentials.email}
             </p>
-            <p className='ml-2 mt-4 mb-2'>License</p>
-            <p className={styles.pInput}>
-              1XC4-DF43-CG24-4S3R
-            </p>
+            <p className="mt-4 mb-2 ml-2">License</p>
+            <p className={styles.pInput}>1XC4-DF43-CG24-4S3R</p>
           </Box>
           <Box>
             <Center>
@@ -92,19 +101,29 @@ const Profile = () => {
             </Center>
             <Center>
               <div className={styles.addContainer}>
-                <Button className={styles.button} onClick={() => navigate('/prices')}>Reset password</Button>
+                <Button
+                  className={styles.button}
+                  onClick={() => navigate("/prices")}
+                >
+                  Reset password
+                </Button>
               </div>
             </Center>
             <Center>
               <div className={styles.addContainer}>
-                <Button className={styles.button} onClick={() => navigate('/prices')}>Purchase license </Button>
+                <Button
+                  className={styles.button}
+                  onClick={() => navigate("/prices")}
+                >
+                  Purchase license{" "}
+                </Button>
               </div>
             </Center>
           </Box>
         </SimpleGrid>
       </Box>
     </div>
-  )
-}
+  );
+};
 
 export default Profile;
