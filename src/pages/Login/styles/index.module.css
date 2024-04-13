@@ -54,4 +54,5 @@
     max-width: 33%;
     background: #D4DCDE;
     z-index: 1;
+    min-width: 300px;
 }

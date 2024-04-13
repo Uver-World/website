@@ -56,16 +56,16 @@ const Header = () => {
           <Link className={styles.title} to="/">UverWorld</Link>
         </div>
         <div className={styles.centerSection}>
-          <Link to="/">Accueil</Link>
-          <Link to="/about">À propos</Link>
+          <Link className={styles.link} to="/">Accueil</Link>
+          <Link className={styles.link} to="/about">À propos</Link>
           {isLogged ? (
             <>
-              <Link to="/prices">Tarifs</Link>
-              <Link to="/contact">Contactez-nous</Link>
-              {(user.group === "User" || user.group === "Website") && <Link to="/dashboard">Dashboard</Link>}
-              <Link to="/profile">Profil</Link>
+              <Link className={styles.link} to="/prices">Tarifs</Link>
+              <Link className={styles.link} to="/contact">Contactez-nous</Link>
+              {(user.group === "User" || user.group === "Website") && <Link className={styles.link} to="/dashboard">Dashboard</Link>}
+              <Link className={styles.link} to="/profile">Profil</Link>
               <span
-                className="font-bold cursor-pointer ml-2 mr-6"
+                className={`font-bold cursor-pointer ml-2 mr-6 ${styles.link}`}
                 onClick={() => {
                   localStorage.removeItem('token');
                   navigate('/login');
@@ -77,10 +77,10 @@ const Header = () => {
             </>
           ) : (
             <>
-              <Link to="/login">Tarifs</Link>
-              <Link to="/login">Contactez-nous</Link>
-              <Link to="/register">Inscription</Link>
-              <Link to="/login">Connexion</Link>
+              <Link className={styles.link} to="/login">Tarifs</Link>
+              <Link className={styles.link} to="/login">Contactez-nous</Link>
+              <Link className={styles.link} to="/register">Inscription</Link>
+              <Link className={styles.link} to="/login">Connexion</Link>
             </>
           )}
         </div>
