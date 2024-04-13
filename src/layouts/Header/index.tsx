@@ -1,10 +1,25 @@
 import styles from "./styles/index.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { loginWithToken } from "../../api/users";
 
 const Header = () => {
   const [isLogged, setIsLogged] = useState(false);
   const navigate = useNavigate();
+  const [user, setUser] = useState({
+    username: "",
+    unique_id: "",
+    logins: [],
+    group: "",
+    authentication: {
+      Credentials: {
+        email: '',
+        password: '',
+        username: ''
+      }
+    },
+    creation_date: "",
+  });
 
   useEffect(() => {
     const checkToken = () => {
@@ -17,7 +32,22 @@ const Header = () => {
     };
 
     checkToken();
-  }, []);
+
+    const getUser = async () => {
+      const userData = await loginWithToken(localStorage.getItem("token") || "");
+
+      if (userData.data.code && userData.data.code !== 200) {
+        alert(userData.data.message);
+      } else {
+        setUser(userData.data);
+      }
+    };
+    
+    if (isLogged) {
+      getUser();
+    }
+
+  }, [isLogged]);
 
   return (
     <div className={styles.container}>
@@ -32,7 +62,7 @@ const Header = () => {
             <>
               <Link to="/prices">Tarifs</Link>
               <Link to="/contact">Contactez-nous</Link>
-              <Link to="/dashboard">Dashboard</Link>
+              {(user.group === "User" || user.group === "Website") && <Link to="/dashboard">Dashboard</Link>}
               <Link to="/profile">Profil</Link>
               <span
                 className="font-bold cursor-pointer ml-2 mr-6"
