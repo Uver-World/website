@@ -15,7 +15,8 @@ const Profile = () => {
     authentication: {
       Credentials: {
         email: '',
-        password: ''
+        password: '',
+        username: ''
       }
     },
     creation_date: '',
@@ -29,7 +30,7 @@ const Profile = () => {
 
     const getUser = async () => {
       const user = await loginWithToken(localStorage.getItem('token') || '');
-      
+
       if (user.data.code && user.data.code !== 200) {
         alert(user.data.message)
         navigate('/login')
@@ -58,7 +59,7 @@ const Profile = () => {
           <img src={team} alt="Notre équipe" className={styles.team} />
         </Center>
         <Center>
-          <h1 className={styles.title}>{user.username}</h1>
+          <h1 className={styles.title}>{user.authentication.Credentials.username}</h1>
         </Center>
         <SimpleGrid columns={3} mt={12} className='max-w-full mx-auto'>
           <Box>
