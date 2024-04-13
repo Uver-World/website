@@ -27,3 +27,19 @@
 .centerSection a {
     @apply mx-2 font-bold;
 }
+
+.link {
+    font-size: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+    .link {
+        font-size: 0.8rem;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .link {
+        font-size: 0.6rem;
+    }
+}

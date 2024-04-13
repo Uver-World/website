@@ -22,7 +22,7 @@ const Contact = () => {
         <p className={styles.text}>
           Email:{" "}
           <a href="mailto:paul.comte@epitech.eu" className={styles.link}>
-            paul.compte@epitech.eu
+            paul.comte@epitech.eu
           </a>
         </p>
       </div>

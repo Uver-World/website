@@ -82,7 +82,7 @@ const Profile = () => {
 
             <div>
               <Link to="/admin/organisations" className="mt-6 underline">
-                see all organisations
+              <p className={styles.additionalText}>see all organisations{" "}</p>
               </Link>
             </div>
           </Box>
@@ -105,7 +105,7 @@ const Profile = () => {
                   className={styles.button}
                   onClick={() => navigate("/prices")}
                 >
-                  Reset password
+                  <p className={styles.additionalText}>Reset password</p>
                 </Button>
               </div>
             </Center>
@@ -115,7 +115,7 @@ const Profile = () => {
                   className={styles.button}
                   onClick={() => navigate("/prices")}
                 >
-                  Purchase license{" "}
+                  <p className={styles.additionalText}>Purchase license{" "}</p>
                 </Button>
               </div>
             </Center>
