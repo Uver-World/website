@@ -6,7 +6,6 @@ import {
   getLicenses,
   getOrganizations,
   loginWithToken,
-  updateUsername,
 } from "../../api/users";
 import styles from "./styles/index.module.css";
 
