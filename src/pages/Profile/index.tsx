@@ -87,12 +87,6 @@ const Profile = () => {
   const updateUser = async () => {
     setUsernameEditing(false);
 
-    const updatedUser = await updateUsername(
-      localStorage.getItem("token") || "",
-      tmpUsername
-    );
-
-    // refresh this page
     window.location.reload();
   };
 
