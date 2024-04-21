@@ -1,9 +1,20 @@
 import { Box, Button, Center, SimpleGrid } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { getOrganizations, loginWithToken } from "../../api/users";
-import team from "../../assets/img/team.jpg";
+import {
+  createLicense,
+  getLicenses,
+  getOrganizations,
+  loginWithToken,
+  updateUsername,
+} from "../../api/users";
 import styles from "./styles/index.module.css";
+
+type License = {
+  unique_id: string;
+  user_id: string;
+  license: string;
+};
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -14,14 +25,18 @@ const Profile = () => {
     group: "",
     authentication: {
       Credentials: {
-        email: '',
-        password: '',
-        username: ''
-      }
+        email: "",
+        password: "",
+        username: "",
+        avatar: "",
+      },
     },
     creation_date: "",
   });
   const [orgs, setOrgs] = useState([]);
+  const [licenses, setLicenses] = useState<License[]>([]);
+  const [usernameEditing, setUsernameEditing] = useState(false);
+  const [tmpUsername, setTmpUsername] = useState("");
 
   useEffect(() => {
     if (!localStorage.getItem("token")) {
@@ -37,7 +52,9 @@ const Profile = () => {
       }
 
       setUser(user.data);
+      setTmpUsername(user.data.authentication.Credentials.username);
       getOrgs(user.data.unique_id);
+      getLic(user.data.unique_id);
     };
 
     const getOrgs = async (id: string) => {
@@ -49,18 +66,62 @@ const Profile = () => {
       setOrgs(orgs.data);
     };
 
+    const getLic = async (id: string) => {
+      const lic = await getLicenses(id, localStorage.getItem("token") || "");
+
+      setLicenses(lic.data);
+    };
+
     getUser();
   }, [navigate]);
+
+  const newLicense = async () => {
+    const lic = await createLicense(
+      user.unique_id,
+      localStorage.getItem("token") || ""
+    );
+
+    setLicenses([...licenses, lic.data]);
+  };
+
+  const updateUser = async () => {
+    setUsernameEditing(false);
+
+    const updatedUser = await updateUsername(
+      localStorage.getItem("token") || "",
+      tmpUsername
+    );
+
+    // refresh this page
+    window.location.reload();
+  };
 
   return (
     <div className={styles.container}>
       <Box mx={10}>
         <Center>
-          {/* TODO: logo */}
-          <img src={team} alt="Notre équipe" className={styles.team} />
+          <img
+            src={user.authentication.Credentials.avatar}
+            alt="Notre équipe"
+            className={styles.team}
+          />
         </Center>
         <Center>
-          <h1 className={styles.title}>{user.authentication.Credentials.username}</h1>
+          {usernameEditing ? (
+            <input
+              type="text"
+              defaultValue={tmpUsername}
+              onChange={(e) => setTmpUsername(e.target.value)}
+              onBlur={(e) => updateUser()}
+            />
+          ) : (
+            <h1
+              className={styles.title}
+              onClick={() => setUsernameEditing(true)}
+            >
+              {user.authentication.Credentials.username}
+            </h1>
+          )}
         </Center>
         <SimpleGrid columns={3} mt={12} className="max-w-full mx-auto">
           <Box>
@@ -82,7 +143,7 @@ const Profile = () => {
 
             <div>
               <Link to="/admin/organisations" className="mt-6 underline">
-              <p className={styles.additionalText}>see all organisations{" "}</p>
+                <p className={styles.additionalText}>see all organisations </p>
               </Link>
             </div>
           </Box>
@@ -93,7 +154,19 @@ const Profile = () => {
               {user.authentication.Credentials.email}
             </p>
             <p className="mt-4 mb-2 ml-2">License</p>
-            <p className={styles.pInput}>1XC4-DF43-CG24-4S3R</p>
+            {licenses.length === 0 && (
+              <p className={styles.pInput}>No license found</p>
+            )}
+            <div className="flex flex-col mb-2 gap-y-1">
+              {licenses.map((license: License) => (
+                <p key={license.unique_id} className={styles.pInput}>
+                  {license.license}
+                </p>
+              ))}
+            </div>
+            <Button className={styles.button} onClick={() => newLicense()}>
+              Get a license
+            </Button>
           </Box>
           <Box>
             <Center>
@@ -115,7 +188,7 @@ const Profile = () => {
                   className={styles.button}
                   onClick={() => navigate("/prices")}
                 >
-                  <p className={styles.additionalText}>Purchase license{" "}</p>
+                  <p className={styles.additionalText}>Purchase license </p>
                 </Button>
               </div>
             </Center>
