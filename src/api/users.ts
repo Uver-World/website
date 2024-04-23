@@ -10,7 +10,7 @@ export const registerUser = async (
 ): Promise<AxiosResponse> => {
   try {
     const response = await axios.post(
-      `${API_URL}/user/register`,
+      `${API_URL}/user`,
       {
         Credentials: {
           email,
@@ -71,11 +71,14 @@ export const renewToken = async (
 
 export const loginWithToken = async (token: string): Promise<AxiosResponse> => {
   try {
-    const response = await axios.get(`${API_URL}/user/token/${token}`, {
-      headers: {
-        "X-User-Token": TOKEN,
-      },
-    });
+    const response = await axios.get(
+      `${API_URL}/user/${token}`,
+      {
+        headers: {
+          'X-User-Token': TOKEN
+        }
+      }
+    );
     return response;
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -90,11 +93,14 @@ export const loginWithToken = async (token: string): Promise<AxiosResponse> => {
 
 export const loginWithID = async (id: string): Promise<AxiosResponse> => {
   try {
-    const response = await axios.get(`${API_URL}/user/id/${id}`, {
-      headers: {
-        "X-User-Token": TOKEN,
-      },
-    });
+    const response = await axios.get(
+      `${API_URL}/user/${id}`,
+      {
+        headers: {
+          'X-User-Token': TOKEN
+        }
+      }
+    );
     return response;
   } catch (error) {
     if (axios.isAxiosError(error)) {
