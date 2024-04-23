@@ -6,7 +6,7 @@ const TOKEN = process.env.REACT_APP_API_TOKEN;
 export const registerUser = async (email: string, password: string, username: string): Promise<AxiosResponse> => {
   try {
     const response = await axios.post(
-      `${API_URL}/user/register`,
+      `${API_URL}/user`,
       {
         Credentials: {
           email,
@@ -65,7 +65,7 @@ export const renewToken = async (email: string, password: string): Promise<Axios
 export const loginWithToken = async (token: string): Promise<AxiosResponse> => {
   try {
     const response = await axios.get(
-      `${API_URL}/user/token/${token}`,
+      `${API_URL}/user/${token}`,
       {
         headers: {
           'X-User-Token': TOKEN
@@ -87,7 +87,7 @@ export const loginWithToken = async (token: string): Promise<AxiosResponse> => {
 export const loginWithID = async (id: string): Promise<AxiosResponse> => {
   try {
     const response = await axios.get(
-      `${API_URL}/user/id/${id}`,
+      `${API_URL}/user/${id}`,
       {
         headers: {
           'X-User-Token': TOKEN

@@ -82,6 +82,9 @@ export const OrganisationEdit = () => {
 
       setOrganisation(org.data);
       getOwner(org.data.owner_id);
+
+      console.log(org.data);
+
       getMembers(org.data.member_ids);
     }
 

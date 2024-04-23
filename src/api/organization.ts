@@ -11,7 +11,7 @@ interface PatchRequestBody {
 export const createOrganisation = async (name: string, owner_id: string): Promise<AxiosResponse> => {
     try {
         const response = await axios.post(
-            `${API_URL}/organization/create`,
+            `${API_URL}/organization/`,
             {
                 name: name,
                 owner_id: owner_id
@@ -36,6 +36,7 @@ export const createOrganisation = async (name: string, owner_id: string): Promis
 };
 
 export const getWithID = async (id: string): Promise<AxiosResponse> => {
+    console.log(id);
     try {
         const response = await axios.get(
             `${API_URL}/organization/${id}`,
