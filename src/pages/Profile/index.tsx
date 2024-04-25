@@ -6,6 +6,7 @@ import {
   getLicenses,
   getOrganizations,
   loginWithToken,
+  updateUsername,
 } from "../../api/users";
 import styles from "./styles/index.module.css";
 
@@ -86,7 +87,19 @@ const Profile = () => {
   const updateUser = async () => {
     setUsernameEditing(false);
 
-    window.location.reload();
+    await updateUsername(localStorage.getItem("token") || "", tmpUsername);
+
+    // window.location.reload();
+    setUser({
+      ...user,
+      authentication: {
+        ...user.authentication,
+        Credentials: {
+          ...user.authentication.Credentials,
+          username: tmpUsername,
+        },
+      },
+    });
   };
 
   return (
