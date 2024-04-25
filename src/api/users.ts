@@ -71,14 +71,11 @@ export const renewToken = async (
 
 export const loginWithToken = async (token: string): Promise<AxiosResponse> => {
   try {
-    const response = await axios.get(
-      `${API_URL}/user/${token}`,
-      {
-        headers: {
-          'X-User-Token': TOKEN
-        }
-      }
-    );
+    const response = await axios.get(`${API_URL}/user/${token}`, {
+      headers: {
+        "X-User-Token": TOKEN,
+      },
+    });
     return response;
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -93,14 +90,11 @@ export const loginWithToken = async (token: string): Promise<AxiosResponse> => {
 
 export const loginWithID = async (id: string): Promise<AxiosResponse> => {
   try {
-    const response = await axios.get(
-      `${API_URL}/user/${id}`,
-      {
-        headers: {
-          'X-User-Token': TOKEN
-        }
-      }
-    );
+    const response = await axios.get(`${API_URL}/user/${id}`, {
+      headers: {
+        "X-User-Token": TOKEN,
+      },
+    });
     return response;
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -227,14 +221,11 @@ export const getOrganizations = async (
   }
 };
 
-export const getLicenses = async (
-  id: string,
-  token: string
-): Promise<AxiosResponse> => {
+export const getLicenses = async (id: string): Promise<AxiosResponse> => {
   try {
     const response = await axios.get(`${API_URL}/user/id/${id}/license`, {
       headers: {
-        "X-User-Token": token,
+        "X-User-Token": TOKEN,
       },
     });
     return response;
@@ -249,17 +240,14 @@ export const getLicenses = async (
   }
 };
 
-export const createLicense = async (
-  id: string,
-  token: string
-): Promise<AxiosResponse> => {
+export const createLicense = async (id: string): Promise<AxiosResponse> => {
   try {
     const response = await axios.post(
       `${API_URL}/user/${id}/license`,
       {},
       {
         headers: {
-          "X-User-Token": token,
+          "X-User-Token": TOKEN,
         },
       }
     );
@@ -289,7 +277,7 @@ export const updateUsername = async (
       ],
       {
         headers: {
-          "X-User-Token": token,
+          "X-User-Token": TOKEN,
         },
       }
     );

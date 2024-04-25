@@ -67,7 +67,7 @@ const Profile = () => {
     };
 
     const getLic = async (id: string) => {
-      const lic = await getLicenses(id, localStorage.getItem("token") || "");
+      const lic = await getLicenses(id);
 
       setLicenses(lic.data);
     };
@@ -76,10 +76,7 @@ const Profile = () => {
   }, [navigate]);
 
   const newLicense = async () => {
-    const lic = await createLicense(
-      user.unique_id,
-      localStorage.getItem("token") || ""
-    );
+    const lic = await createLicense(user.unique_id);
 
     setLicenses([...licenses, lic.data]);
   };
@@ -89,7 +86,6 @@ const Profile = () => {
 
     await updateUsername(localStorage.getItem("token") || "", tmpUsername);
 
-    // window.location.reload();
     setUser({
       ...user,
       authentication: {

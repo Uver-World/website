@@ -1,8 +1,8 @@
-import styles from './styles/index.module.css';
-import {Box, Button, SimpleGrid} from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
-import {useNavigate} from "react-router-dom";
-import { getOrganizations, loginWithToken } from '../../api/users';
+import { Box, Button, SimpleGrid } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { getOrganizations, loginWithToken } from "../../api/users";
+import styles from "./styles/index.module.css";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -11,43 +11,51 @@ const Dashboard = () => {
   const [membersLength, setMembersLength] = useState(0);
 
   useEffect(() => {
-    if (!localStorage.getItem('token')) {
-      navigate('/login')
+    if (!localStorage.getItem("token")) {
+      navigate("/login");
     }
 
     const getUser = async () => {
-      const user = await loginWithToken(localStorage.getItem('token') || '');
-      
+      const user = await loginWithToken(localStorage.getItem("token") || "");
+
       if (user.data.code && user.data.code !== 200) {
-        alert(user.data.message)
-        navigate('/login')
+        alert(user.data.message);
+        navigate("/login");
       }
-      
-      setUser(user.data)
-      getOrgs(user.data.unique_id)
-    }
+
+      setUser(user.data);
+      getOrgs(user.data.unique_id);
+    };
 
     const getOrgs = async (id: string) => {
-      const orgs = await getOrganizations(id, localStorage.getItem('token') || '')
+      const orgs = await getOrganizations(
+        id,
+        localStorage.getItem("token") || ""
+      );
 
-      setOrgsLength(orgs.data.length)
+      setOrgsLength(orgs.data.length);
 
       let members = 0;
 
       orgs.data.forEach((org: any) => {
-        members += org.member_ids.length
-      })
+        members += org.member_ids.length;
+      });
 
-      setMembersLength(members)
-    }
+      setMembersLength(members);
+    };
 
-    getUser()
+    getUser();
   }, [user, navigate]);
 
   return (
     <div className={`${styles.container} ${styles.profileContainer}`}>
       <Box mx={5}>
-        <SimpleGrid columns={{ base: 1, md: 3 }} spacing={5} mt={12} className='max-w-full mx-auto'>
+        <SimpleGrid
+          columns={{ base: 1, md: 3 }}
+          spacing={5}
+          mt={12}
+          className="max-w-full mx-auto"
+        >
           <Box>
             <div className={`${styles.pCollaboratorsInput} ${styles.team}`}>
               <p className={styles.sh}>Organisations</p>
@@ -55,10 +63,20 @@ const Dashboard = () => {
             </div>
             <p className={styles.additionalText}>Create</p>
             <div>
-              <Button className={`${styles.pOrgaInput} ${styles.leftAlignedButton}`} onClick={() => navigate('/admin/organisations')}>Organisation</Button>
+              <Button
+                className={`${styles.pOrgaInput} ${styles.leftAlignedButton}`}
+                onClick={() => navigate("/admin/organisations")}
+              >
+                Organisation
+              </Button>
             </div>
             <div>
-              <Button className={`${styles.pOrgaInput} ${styles.leftAlignedButton}`} onClick={() => navigate('/admin/users')}>Invite users</Button>
+              <Button
+                className={`${styles.pOrgaInput} ${styles.leftAlignedButton}`}
+                onClick={() => navigate("/admin/users")}
+              >
+                Invite users
+              </Button>
             </div>
           </Box>
           <Box>
@@ -68,10 +86,20 @@ const Dashboard = () => {
             </div>
             <p className={styles.additionalText}>Manage</p>
             <div>
-              <Button className={`${styles.pOrgaInput} ${styles.leftAlignedButton}`} onClick={() => navigate('/admin/organisations')}>Manage organisations</Button>
+              <Button
+                className={`${styles.pOrgaInput} ${styles.leftAlignedButton}`}
+                onClick={() => navigate("/admin/organisations")}
+              >
+                Manage organisations
+              </Button>
             </div>
             <div>
-              <Button className={`${styles.pOrgaInput} ${styles.leftAlignedButton}`} onClick={() => navigate('/admin/users')}>Manage users</Button>
+              <Button
+                className={`${styles.pOrgaInput} ${styles.leftAlignedButton}`}
+                onClick={() => navigate("/admin/users")}
+              >
+                Manage users
+              </Button>
             </div>
           </Box>
           <Box>
@@ -84,7 +112,8 @@ const Dashboard = () => {
                 Clement has been downgraded to spectator by Matthew
               </p>
               <p className={styles.pOrganisationInput}>
-                Clement has been kicked by Matthew for community guideline violations
+                Clement has been kicked by Matthew for community guideline
+                violations
               </p>
             </div>
           </Box>
@@ -92,7 +121,6 @@ const Dashboard = () => {
       </Box>
     </div>
   );
-  
-}
+};
 
 export default Dashboard;
