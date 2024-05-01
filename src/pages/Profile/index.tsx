@@ -79,6 +79,7 @@ const Profile = () => {
     const lic = await createLicense(user.unique_id);
 
     setLicenses([...licenses, lic.data]);
+    window.location.reload();
   };
 
   const updateUser = async () => {
