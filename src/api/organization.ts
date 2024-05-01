@@ -128,3 +128,26 @@ export const addUserToOrganization = async (id: string, member_id: string): Prom
         throw error;
     }
 };
+
+export const deleteUserFromOrganization = async (id: string, member_id: string): Promise<AxiosResponse> => {
+    try {
+        const response = await axios.delete(
+            `${API_URL}/organization/${id}/members`,
+            {
+                data: {member_id},
+                headers: {
+                    'X-User-Token': TOKEN
+                }
+            }
+        );
+        return response;
+    } catch (error) {
+        if (axios.isAxiosError(error)) {
+            console.error('AxiosError:', error.message);
+            console.error('Response data:', error.response?.data);
+        } else {
+            console.error('Error:', (error as Error).message);
+        }
+        throw error;
+    }
+};

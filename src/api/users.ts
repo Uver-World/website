@@ -240,6 +240,25 @@ export const getLicenses = async (id: string): Promise<AxiosResponse> => {
   }
 };
 
+export const getWithEmail = async (email: string): Promise<AxiosResponse> => {
+  try {
+    const response = await axios.get(`${API_URL}/user/email/${email}`, {
+      headers: {
+        "X-User-Token": TOKEN,
+      },
+    });
+    return response;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error("AxiosError:", error.message);
+      console.error("Response data:", error.response?.data);
+    } else {
+      console.error("Error:", (error as Error).message);
+    }
+    throw error;
+  }
+};
+
 export const createLicense = async (id: string): Promise<AxiosResponse> => {
   try {
     const response = await axios.post(

@@ -166,14 +166,16 @@ const Profile = () => {
                 </p>
               ))}
             </div>
-            <Button className={styles.button} onClick={() => newLicense()}>
-              Get a license
-            </Button>
-            {licenses.length > 0 ? (
-              <Button className={styles.button} onClick={() => console.log("bravo frerot tu as téléchargé uverworld")}>
-                Download
+            <div className={styles.buttonContainer}>
+              <Button className={styles.button} onClick={() => newLicense()}>
+                Get a license
               </Button>
-            ) : null}
+              {licenses.length > 0 ? (
+                <Button className={styles.button} onClick={() => console.log("bravo frerot tu as téléchargé uverworld")}>
+                  Download
+                </Button>
+              ) : null}
+            </div>
           </Box>
           <Box>
             <Center>

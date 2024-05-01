@@ -1,11 +1,11 @@
 import styles from './styles/UserList.module.css';
-import {Badge, Box, Button, Input, SimpleGrid, Table, Tbody, Td, Th, Thead, Tr} from "@chakra-ui/react";
+import { Badge, Box, Button, Input, SimpleGrid, Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
 import React, { useEffect } from "react";
-import {DeleteIcon, EditIcon} from "@chakra-ui/icons";
-import {useNavigate} from "react-router-dom";
-import {useParams} from "react-router-dom";
-import {getWithID, deleteWithID} from "../../api/organization";
-import {loginWithID} from "../../api/users";
+import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
+import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { getWithID, deleteWithID, addUserToOrganization, deleteUserFromOrganization } from "../../api/organization";
+import { getWithEmail, loginWithID } from "../../api/users";
 
 enum Group {
   ADMIN = 'Administrator',
@@ -38,40 +38,43 @@ interface User {
 }
 
 export const OrganisationEdit = () => {
-    const {id} = useParams();
-    const [username, setUsername] = React.useState('');
-    const navigate = useNavigate();
-    const [organisation, setOrganisation] = React.useState<Organisation>();
-    const [owner, setOwner] = React.useState<User>();
-    const [members, setMembers] = React.useState<User[]>([]);
+  const { id } = useParams();
+  const [email, setEmail] = React.useState('');
+  const [showWarning, setShowWarning] = React.useState(false);
+  const [showExisting, setShowExisting] = React.useState(false);
+  const navigate = useNavigate();
+  const [organisation, setOrganisation] = React.useState<Organisation>();
+  const [owner, setOwner] = React.useState<User>();
+  const [members, setMembers] = React.useState<User[]>([]);
 
-  const addUser = () => {
-    if (!username) return;
-    setMembers([...members, {
-      username: username,
-      unique_id: '123',
-      logins: [],
-      group: Group.USER,
-      authentication: {
-        Credentials: {
-          email: '123',
-          password: '123', 
-          username: '123'
-        }
-      },
-      creation_date: '123',
-    }]);
-    // TODO: Remove from API
+  const addUser = async () => {
+    if (!email) return;
+    const user = await getWithEmail(email);
+    if (user.data.code === undefined) {
+      const response = await addUserToOrganization(id || '', user.data.unique_id);
+      if (response.status === 200 && response.data === true) {
+        setMembers([...members, user.data as User]);
+        setShowWarning(false);
+        setShowExisting(false);
+      } else if (response.data !== true) {
+        setShowExisting(true);
+      }
+    } else {
+      setShowWarning(true);
+      setShowExisting(false);
+    }
   }
 
   const deleteOrganisation = () => {
     deleteWithID(id || '');
     navigate('/admin/organisations');
   }
-    
-  const deleteUser = (index: number) => {
+
+  const deleteUser = async (index: number) => {
+    const user = members[index];
+    const response = await deleteUserFromOrganization(id || '', user.unique_id);
+    console.log(response);
     setMembers(members.filter((_, i) => i !== index));
-    // TODO: Remove from api
   }
 
   useEffect(() => {
@@ -99,10 +102,9 @@ export const OrganisationEdit = () => {
         const member = await loginWithID(id);
         return member.data;
       }));
-      
+
       setMembers(members);
     }
-
 
     getOrg();
   }, [id, navigate])
@@ -113,44 +115,45 @@ export const OrganisationEdit = () => {
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>{organisation.name}</h1>
-
       <SimpleGrid columns={2} spacing={10} mt={12} className="max-w-4xl mx-auto">
         <div><p className={styles.labelCenter}>participants</p>
 
-      <Table variant='simple' className={styles.table}>
-        <Thead>
-          <Tr>
-            <Th>Username</Th>
-            <Th>Groups</Th>
-            <Th>Actions</Th>
-          </Tr>
-        </Thead>
-        <Tbody>
-          {members.map((user, index) => (
-              <Tr key={index}>
-              <Td>
-                { user.group.includes(Group.ADMIN) ?
-                  <Badge colorScheme="green" className={styles.badge}>Admin</Badge> :
-                  <Badge colorScheme="blue" className={styles.badge}>User</Badge>}
-                {user.username}
-              </Td>
-              <Td>
-                  {user.group}
-              </Td>
-              <Td>
-                <EditIcon className={styles.editIcon} onClick={() => navigate(`/admin/users/${user.unique_id}`)} />
-                <DeleteIcon className={styles.deleteIcon} onClick={() => deleteUser(index)} />
-              </Td>
-            </Tr>
-          ))}
-        </Tbody>
-        
-      </Table>
-      <div className={styles.addOrganisationContainer}>
-      <Input placeholder='Add new collaborator' className={styles.addOrganisationUserInput} onChange={(e) => setUsername(e.target.value)} />
-      <Button className={styles.addButton} onClick={addUser}>Add</Button>
-    </div>
+          <Table variant='simple' className={styles.table}>
+            <Thead>
+              <Tr>
+                <Th>Username</Th>
+                <Th>Groups</Th>
+                <Th>Actions</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {members.map((user, index) => (
+                <Tr key={index}>
+                  <Td>
+                    {user.group.includes(Group.ADMIN) ?
+                      <Badge colorScheme="green" className={styles.badge}>Admin</Badge> :
+                      <Badge colorScheme="blue" className={styles.badge}>User</Badge>}
+                    {user.authentication.Credentials.username}
+                  </Td>
+                  <Td>
+                    {user.group}
+                  </Td>
+                  <Td>
+                    <EditIcon className={styles.editIcon} onClick={() => navigate(`/admin/users/${user.unique_id}`)} />
+                    <DeleteIcon className={styles.deleteIcon} onClick={() => deleteUser(index)} />
+                  </Td>
+                </Tr>
+              ))}
+            </Tbody>
+
+          </Table>
+          {showWarning && <div className="warning" style={{color: 'red', fontWeight:'bold'}}>User not found</div>}
+          {showExisting && <div className="warning" style={{color: 'red', fontWeight:'bold'}}>User is already a part of this organisaton</div>}
+          <div className={styles.addOrganisationContainer}>
+            <Input placeholder='Add new collaborator' className={styles.addOrganisationUserInput} onChange={(e) => setEmail(e.target.value)} />
+            <Button className={styles.addButton} onClick={addUser}>Add</Button>
           </div>
+        </div>
         <Box>
           <p className={styles.label}>Organisation owner info</p>
           <p className={styles.pOrganisationInput}>
@@ -185,7 +188,7 @@ export const OrganisationEdit = () => {
           </Button>
         </div>
       </div>
-      
+
     </div>
   )
 }
