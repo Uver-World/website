@@ -169,6 +169,11 @@ const Profile = () => {
             <Button className={styles.button} onClick={() => newLicense()}>
               Get a license
             </Button>
+            {licenses.length > 0 ? (
+              <Button className={styles.button} onClick={() => console.log("bravo frerot tu as téléchargé uverworld")}>
+                Download
+              </Button>
+            ) : null}
           </Box>
           <Box>
             <Center>
