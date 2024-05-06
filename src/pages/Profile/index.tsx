@@ -99,6 +99,26 @@ const Profile = () => {
     });
   };
 
+  const handleDownload = () => {
+    fetch("/uverworld.zip")
+      .then((response) => {
+        return response.blob();
+      })
+      .then((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "uverworld.zip";
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+      })
+      .catch((error) => {
+        console.error("Error downloading the ZIP file:", error);
+      });
+  };
+
   return (
     <div className={styles.container}>
       <Box mx={10}>
@@ -172,7 +192,7 @@ const Profile = () => {
                 Get a license
               </Button>
               {licenses.length > 0 ? (
-                <Button className={styles.button} onClick={() => console.log("bravo frerot tu as téléchargé uverworld")}>
+                <Button className={styles.button} onClick={() => handleDownload()}>
                   Download
                 </Button>
               ) : null}
