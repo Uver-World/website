@@ -1,0 +1,88 @@
+.container {
+    text-align: center;
+}
+
+.title {
+    font-size: 3em;
+    font-weight: bold;
+    color: white;
+}
+
+.h2 {
+    font-size: 2em;
+    font-weight: bold;
+    color: black;
+}
+
+
+.subtitle {
+    font-size: 1.2em;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.faqs {
+    width: 100%;
+    max-width: 768px;
+    margin: 0 auto;
+    padding: 15px;
+}
+
+.faqs .faq {
+    margin: 15px;
+    padding: 15px;
+    background: #E9F0F2;
+    border-radius: 10px;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+.faqs .faq .question {
+    position: relative;
+    font-size: 20px;
+    padding-right: 80px;
+    transition: all 0.4s ease;
+}
+
+.faqs .faq .question::after {
+    content: "+";
+    position: absolute;
+    top: 50%;
+    right: 0px;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    transition: all 0.2s ease;
+}
+
+.faqs .faq .answer {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.2s ease;
+}
+
+.faqs .open .question {
+    margin-bottom: 15px;
+}
+
+.faqs .open .question::after {
+    content: "-";
+}
+
+.faqs .open .answer {
+    max-height: 1000px;
+    opacity: 1;
+}
+
+.hero {
+    @apply w-full h-72 object-cover object-center bg-slate-900 text-white flex flex-col justify-center items-center overflow-hidden relative;
+}
+
+.hero h1 {
+    @apply text-5xl font-bold text-center z-10;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.hero p {
+    @apply text-center mb-4 z-10;
+}
