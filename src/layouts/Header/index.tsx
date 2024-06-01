@@ -62,6 +62,7 @@ const Header = () => {
             <>
               <Link className={styles.link} to="/prices">Tarifs</Link>
               <Link className={styles.link} to="/contact">Contactez-nous</Link>
+              <Link className={styles.link} to="/faq">FAQ</Link>
               {(user.group === "User" || user.group === "Website") && <Link className={styles.link} to="/dashboard">Dashboard</Link>}
               <Link className={styles.link} to="/profile">Profil</Link>
               <span
@@ -79,6 +80,7 @@ const Header = () => {
             <>
               <Link className={styles.link} to="/login">Tarifs</Link>
               <Link className={styles.link} to="/login">Contactez-nous</Link>
+              <Link className={styles.link} to="/faq">FAQ</Link>
               <Link className={styles.link} to="/register">Inscription</Link>
               <Link className={styles.link} to="/login">Connexion</Link>
             </>

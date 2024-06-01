@@ -21,6 +21,7 @@ import Dashboard from './pages/dashboard';
 import { Register } from './pages/Register';
 import { Login } from './pages/Login';
 import { ProtectedRoute } from './protected';
+import Faq from './pages/Faq';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -47,6 +48,7 @@ root.render(
             <Route path="about" element={<About />} />
             <Route path="contact" element={<Contact />} />
             <Route path="profile" element={<Profile />} />
+            <Route path="faq" element={<Faq />} />
             <Route path="/dashboard" element={<ProtectedRoute groups={adminGroups} child={<Dashboard />} />} />
             <Route path="admin">
               <Route path="users">
