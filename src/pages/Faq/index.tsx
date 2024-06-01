@@ -97,7 +97,7 @@ const Faq = () => {
 
     const toggleServerFAQ = (index: number) => {
         setServerFaqs(
-            clientFaqs.map((faq, i) => {
+            serverFaqs.map((faq, i) => {
                 if (i === index) {
                     faq.open = !faq.open;
                 } else {
