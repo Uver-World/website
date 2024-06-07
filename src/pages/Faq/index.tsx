@@ -17,12 +17,49 @@ const Faq = () => {
             open: false
         },
         {
+            question: "Quels sont les avantages d'utiliser UverWorld par rapport à d'autres logiciels de simulation?",
+            answer: "Les avantages principaux d'UverWorld sont premièrement le niveau de personalisation de vos simulations; une infinité de types de simulations sont possibles. De plus vos calculs seront éffectués sur nos serveurs contrairement à nos concurrents qui nécéssitent une machine puissante pour éffectuer ces calculs. Notre équipe est aussi un avantage, nos membres sont jeunes, dynamiques et motivés donc des améliorations sont à prévoir en grande quantité et qualité.",
+            open: false
+        },
+        {
+            question: "Quelles sont les ressources disponibles pour apprendre à utiliser UverWorld?",
+            answer: "Nous prévoyons de travailler sur une version tutoriel pour apprendre à prendre UverWorld en main, en attendant n'ayez pas peur d'explorer le logiciel par vous même et à nous contacter en cas de besoin.",
+            open: false
+        },  
+        {
             question: "Est-ce que je peux utiliser UverWorld avec une machine peu robuste?",
             answer: "Bien sûr! Tous les calculs qui seront nécessaires dans votre simulation sont faits sur nos serveurs et le rendu est ensuite renvoyé vers vous, l'utilisateur. Il vous suffit juste d'avoir une connexion stable.",
             open: false
         },
+        {
+            question: "Je rencontre des problèmes lors de l'installation d'uverworld, que faire?",
+            answer: "Pas d'inquiétude! Rendez vous sur la page 'Contact' et un membre de notre équipe technique reprendra rappidement contact avec vous.",
+            open: false
+        },
+        {
+            question: "Je rencontre des problèmes lors de l'utilisation d'uverworld, que faire?",
+            answer: "Pas d'inquiétude! Rendez vous sur la page 'Contact' et un membre de notre équipe technique reprendra rappidement contact avec vous.",
+            open: false
+        },
+        {
+            question: "Comment puis-je contacter l'équipe d'UverWorld pour obtenir de l'aide?",
+            answer: "Rendez vous sur la page 'Contact' et un membre de notre équipe technique reprendra rappidement contact avec vous.",
+            open: false
+        },
+        {
+            question:
+                "Quelles sont les conditions générales d'utilisation d'UverWorld?",
+            answer: "Pour l'instant, seulement quelques personnes ont accès à UverWorld avec notre accord, une fois que UverWorld sortira de son statut de Beta, des conditions générales d'utilisation et de vente seront crées.",
+            open: false
+        },
     ]);
     const [siteFaqs, setSiteFaqs] = useState([
+        {
+            question:
+                "Comment puis-je créer un compte sur UverWorld?",
+            answer: "Pour vous créer un compte UverWorld, il vous suffira de vous inscrire sur le site en cliquant sur le bouton 's'inscrire' en haut à droite, vos données seront ensuite synchronisées et vous aurez accès à votre compte sur le site ainsi que sur le client.",
+            open: false
+        },
         {
             question:
                 "Comment Est-ce que je peux télécharger le client UverWorld?",
@@ -34,7 +71,19 @@ const Faq = () => {
                 "Comment est-ce que je peux acheter une license?",
             answer: "Pour acheter une license, rendez vous sur la page 'Tarifs' dans la barre de navigation. Choissisez l'option qui vous correspond le mieux et une fois le payement complété vous aurez accès au logiciel UverWorld.",
             open: false
-        }
+        },
+        {
+            question:
+                "Quel est le prix d'une license?",
+            answer: "Le prix de la license dépendra de votre besoin, plusieurs types de licenses seront disponibles prochainement et les prix de ceux-ci ne sont pas encore définis.",
+            open: false
+        },
+        {
+            question:
+                "Comment puis-je accéder aux mises à jour d'UverWorld?",
+            answer: "Nous prévoyons d'ajouter une page 'news' pour vous communiquer toutes les mises à jour et toutes les nouvelles concernant UverWorld. Il suffira de faire une mise à niveau sur le site et vous serez de nouveau à jour avec la dernière version d'UverWorld.",
+            open: false
+        },
     ]);
     const [clientFaqs, setClientFaqs] = useState([
         {
@@ -43,14 +92,56 @@ const Faq = () => {
             answer: "Pour créer votre première simulation il vous suffit d'installer le client UverWorld sur lequel vous aurez accès à tous nos outils pour pouvoir faire vos simulations.",
             open: false
         },
+        {
+            question:
+                "Est-ce que je dois recréer ma simulation à chaque utilisation?",
+            answer: "Non pas d'inquiétudes! Vous pouvez directement exporter votre simulation grâce à notre système de sauvegardes et la re-importer plus tard quand vous souhaitez travailler dessus.",
+            open: false
+        },
+        {
+            question:
+                "Comment puis-je importer des données dans UverWorld?",
+            answer: "Vous pouvez directement importer des fichiers JSON qui contiendront toutes les données de votre simulation. Vous pouvez aussi importer des modèles pour les modifier et les visualiser dans la section 'Models' du client",
+            open: false
+        },
+        {
+            question:
+                "Comment puis-je partager mes simulations avec d'autres personnes?",
+            answer: "En sauvegardant votre fichier dans le client, un fichier JSON sera crée avec toutes les informations nécessaires pour charger votre simulation sur n'importe quelle autre machine.",
+            open: false
+        },
+        {
+            question:
+                "Comment puis-je signaler un bug lors de l'utilisation du client?",
+            answer: "Rendez vous sur la page 'Contact' et un membre de notre équipe technique reprendra rappidement contact avec vous pour résoudre le problème.",
+            open: false
+        },
     ]);
     const [serverFaqs, setServerFaqs] = useState([
         {
             question:
-                "abcdefghijklmnop",
-            answer: "lorem ipsum",
+                "Quelle charge est-ce que le serveur peut soutenir?",
+            answer: "Le serveur est actuellement en capacité de soutenir une simulation contenant plus d'un million d'entités en simultanée, avec le temps ceci évoluera.",
             open: false
-        }
+        },
+        {
+            question:
+                "Quelle vitesse de téléchargement est recommandée pour avoir un bon rendu visuel de la simulation?",
+            answer: "Pour uniquement visualiser la simulation il faudra une connexion assez basique, 8Mbps suffiront mais si vous comptez intéragir avec la simulation (se déplacer, zoomer...) il vous faudra une connexion assez stable d'envirront 50Mbps.",
+            open: false
+        },
+        {
+            question:
+                "Est-ce que ma distance géographique impacte le rendu de la simulation?",
+            answer: "Pour l'instant tous nos serveurs sont hébergés en Europe de l'ouest donc si vous êtes en Asie ou aux Etats unis vous aurez plus de latence, dans le futur nous comptons héberger des serveurs partout autour du monde pour que le temps de latence soit faible peu importe votre emplacement.",
+            open: false
+        },
+        {
+            question:
+                "Est-ce que je peux héberger un serveur local?",
+            answer: "C'est une option qui n'est pas encore disponible pour l'instant mais c'est une des features que nous comptons réaliser dans un futur très proche.",
+            open: false
+        },
     ]);
 
     const toggleGeneralFAQ = (index: number) => {
