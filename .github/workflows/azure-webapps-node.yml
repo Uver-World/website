@@ -1,12 +1,12 @@
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   workflow_dispatch:
 
 env:
-  AZURE_WEBAPP_NAME: uverworld-website    # set this to your application's name
-  AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
-  NODE_VERSION: '18.x'                # set this to the node version to use
+  AZURE_WEBAPP_NAME: uverworld-website # set this to your application's name
+  AZURE_WEBAPP_PACKAGE_PATH: "." # set this to the path to your web app project, defaults to the repository root
+  NODE_VERSION: "18.x" # set this to the node version to use
 
 permissions:
   contents: read
@@ -15,39 +15,39 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ env.NODE_VERSION }}
-        cache: 'npm'
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
 
-    - name: npm install, build, and test
-      env:
-        REACT_APP_API_URL: http://x2025uverworld1150768037000.francecentral.cloudapp.azure.com:8000
-        REACT_APP_API_TOKEN: 6trxi8FaF7DWOLuakATLklajuLejxOVM
-      run: |
-        npm install
-        npm run build --if-present
-        mv build website
+      - name: npm install, build, and test
+        env:
+          REACT_APP_API_URL: http://x2025uverworld1833467632001.francecentral.cloudapp.azure.com:8000
+          REACT_APP_API_TOKEN: 6trxi8FaF7DWOLuakATLklajuLejxOVM
+        run: |
+          npm install
+          npm run build --if-present
+          mv build website
 
-    - name: Copy zip to VPS
-      uses: appleboy/scp-action@master
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        password: ${{ secrets.PASSWORD }}
-        port: ${{ secrets.PORT }}
-        source: website
-        target: ~/ 
+      - name: Copy zip to VPS
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          source: website
+          target: ~/
 
-    - name: SSH to VPS
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        password: ${{ secrets.PASSWORD }}
-        port: ${{ secrets.PORT }}
-        script: |
-          pm2 restart 0
+      - name: SSH to VPS
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: |
+            pm2 restart 0
