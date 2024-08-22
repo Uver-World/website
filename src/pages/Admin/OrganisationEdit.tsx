@@ -64,6 +64,7 @@ export const OrganisationEdit = () => {
         id || "",
         user.data.unique_id
       );
+
       if (response.status === 200 && response.data === true) {
         setMembers([...members, user.data as User]);
         setShowWarning(false);
@@ -84,7 +85,7 @@ export const OrganisationEdit = () => {
 
   const deleteUser = async (index: number) => {
     const user = members[index];
-    const response = await deleteUserFromOrganization(id || "", user.unique_id);
+    await deleteUserFromOrganization(id || "", user.unique_id);
     setMembers(members.filter((_, i) => i !== index));
   };
 

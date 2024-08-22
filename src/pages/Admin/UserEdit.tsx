@@ -1,13 +1,8 @@
-import styles from "./styles/UserList.module.css";
-import { Box, Button, Select, SimpleGrid } from "@chakra-ui/react";
+import { Box, Button, SimpleGrid } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { loginWithID } from "../../api/users";
-
-enum Role {
-  ADMIN = "Administrator",
-  USER = "User",
-}
+import styles from "./styles/UserList.module.css";
 
 interface User {
   username: string;

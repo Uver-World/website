@@ -20,6 +20,8 @@ const Header = () => {
     creation_date: "",
   });
 
+  console.log(user);
+
   useEffect(() => {
     const checkToken = () => {
       if (localStorage.getItem("token")) {
