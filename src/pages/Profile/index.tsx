@@ -22,7 +22,6 @@ const Profile = () => {
     username: "",
     unique_id: "",
     logins: [],
-    group: "",
     authentication: {
       Credentials: {
         email: "",
@@ -192,7 +191,10 @@ const Profile = () => {
                 Get a license
               </Button>
               {licenses.length > 0 ? (
-                <Button className={styles.button} onClick={() => handleDownload()}>
+                <Button
+                  className={styles.button}
+                  onClick={() => handleDownload()}
+                >
                   Download
                 </Button>
               ) : null}

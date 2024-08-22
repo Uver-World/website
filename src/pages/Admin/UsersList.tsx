@@ -1,6 +1,5 @@
 import { EditIcon } from "@chakra-ui/icons";
 import {
-  Badge,
   Table,
   TableContainer,
   Tbody,
@@ -28,11 +27,11 @@ interface User {
   username: string;
   unique_id: string;
   logins: [];
-  group: string;
   authentication: {
     Credentials: {
       email: string;
       password: string;
+      username: string | undefined;
     };
   };
   creation_date: string;
@@ -96,12 +95,7 @@ export const UsersList = () => {
           <Tbody>
             {users.map((user, index) => (
               <Tr key={index}>
-                <Td>
-                  <Badge colorScheme="blue" className={styles.badge}>
-                    {user.group}
-                  </Badge>
-                  {user.username}
-                </Td>
+                <Td>{user.authentication.Credentials.username}</Td>
                 <Td>
                   {organisations.map((org) => {
                     if (org.member_ids.includes(user.unique_id as never)) {
