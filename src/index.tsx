@@ -23,6 +23,8 @@ import { Login } from './pages/Login';
 import { ProtectedRoute } from './protected';
 import Faq from './pages/Faq';
 import Marketplace from './pages/Marketplace';
+import ProductPage from './pages/ProductPage';
+
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -67,6 +69,7 @@ root.render(
               <Route path="1" element={<PricesList />} />
               <Route path="1" element={<PricesList />} />
             </Route>
+            <Route path="product/:id" element={<ProductPage />} />
           </Routes>
         </main>
       </BrowserRouter>
