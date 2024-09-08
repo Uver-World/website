@@ -63,6 +63,7 @@ const Header = () => {
               <Link className={styles.link} to="/prices">Tarifs</Link>
               <Link className={styles.link} to="/contact">Contactez-nous</Link>
               <Link className={styles.link} to="/faq">FAQ</Link>
+              <Link className={styles.link} to="/marketplace">Marketplace</Link>
               {(user.group === "User" || user.group === "Website") && <Link className={styles.link} to="/dashboard">Dashboard</Link>}
               <Link className={styles.link} to="/profile">Profil</Link>
               <span
