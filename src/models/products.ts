@@ -1,3 +1,7 @@
+interface Comment {
+    text: string;
+    timestamp: string;
+}
 export class Product {
     id: number;
     title: string;
@@ -6,12 +10,12 @@ export class Product {
     price: string;
     coverImage: string;
     images: string[];
-    comments: string[];
+    comments: Comment[];
     upvoteUserIds: number[];
     downvoteUserIds: number[];
     favoriteUserIds: number[];
 
-    constructor(id: number, title: string, description: string, uploadDate: string, price: string, coverImage: string, images: string[], comments: string[], upvoteUserIds: number[], downvoteUserIds: number[], favoriteUserIds: number[]) {
+    constructor(id: number, title: string, description: string, uploadDate: string, price: string, coverImage: string, images: string[], comments: Comment[], upvoteUserIds: number[], downvoteUserIds: number[], favoriteUserIds: number[]) {
         this.id = id;
         this.title = title;
         this.description = description;

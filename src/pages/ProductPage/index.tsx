@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Card, Button, Modal } from 'react-bootstrap';
-import { FaHeart, FaThumbsUp, FaThumbsDown, FaArrowLeft, FaArrowRight, FaTimes } from 'react-icons/fa';
+import { Button, Modal } from 'react-bootstrap';
+import { FaHeart, FaThumbsUp, FaThumbsDown, FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import styles from "./styles/index.module.css";
 import { Product } from '../../models/products';
-import { Divider, StepSeparator } from '@chakra-ui/react';
+import { Divider } from '@chakra-ui/react';
+
+// Mock Comment type with timestamp
+interface Comment {
+    text: string;
+    timestamp: string;
+}
 
 const userId = 1;
 
@@ -14,16 +20,19 @@ const ProductPage = () => {
     const [product, setProduct] = useState<Product>();
     const [showModal, setShowModal] = useState(false);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const [comment, setComment] = useState('');
+    const [comments, setComments] = useState<Comment[]>([]);
 
     useEffect(() => {
         const fakeProducts = [
-            new Product(1, "Product 1", "Description for product 1", "2023-01-01", "10€", "https://mrwallpaper.com/images/hd/1920x1080-hd-nature-old-mountain-o3g4tz5qe34ij38f.jpg", ["https://mrwallpaper.com/images/hd/1920x1080-hd-nature-old-mountain-o3g4tz5qe34ij38f.jpg"], ["terrible", "awfull"], [1], [], [1, 2]),
-            new Product(2, "AMANSON Boîtier PC pré-installé 9 Ventilateurs ARGB, boîtier de Jeu ATX Tour Moyenne avec Double Verre trempé Full View boîtiers d'ordinateur Noir H06", "AMANSON Boîtier PC pré-installé 9 Ventilateurs ARGB, boîtier de Jeu ATX Tour Moyenne avec Double Verre trempé Full View boîtiers d'ordinateur Noir H06", "2023-02-01", "10€", "https://images.unsplash.com/photo-1553649033-3fbc8d0fa3cb?ixlib=rb-4.0.3", ["https://images.unsplash.com/photo-1553649033-3fbc8d0fa3cb?ixlib=rb-4.0.3", "https://mrwallpaper.com/images/hd/1920x1080-hd-nature-old-mountain-o3g4tz5qe34ij38f.jpg"], ["terrible", "awfull"], [], [1], []),
+            new Product(1, "Product 1", "Description for product 1", "2023-01-01", "10€", "https://mrwallpaper.com/images/hd/1920x1080-hd-nature-old-mountain-o3g4tz5qe34ij38f.jpg", ["https://mrwallpaper.com/images/hd/1920x1080-hd-nature-old-mountain-o3g4tz5qe34ij38f.jpg"], [{ text: "terrible", timestamp: "2023-01-01T12:00:00Z" }, { text: "awful", timestamp: "2023-01-02T12:00:00Z" }], [1], [], [1, 2]),
+            new Product(2, "AMANSON Boîtier PC pré-installé 9 Ventilateurs ARGB", "Description", "2023-02-01", "10€", "https://images.unsplash.com/photo-1553649033-3fbc8d0fa3cb?ixlib=rb-4.0.3", ["https://images.unsplash.com/photo-1553649033-3fbc8d0fa3cb?ixlib=rb-4.0.3"], [{ text: "terrible", timestamp: "2023-01-01T12:00:00Z" }, { text: "awful", timestamp: "2023-01-02T12:00:00Z" }], [], [1], []),
             // Add other products...
         ];
         const selectedProduct = fakeProducts.find(p => p.id === productId);
         if (selectedProduct) {
             setProduct(selectedProduct);
+            setComments(selectedProduct.comments);
         }
     }, [productId]);
 
@@ -102,6 +111,30 @@ const ProductPage = () => {
         setCurrentImageIndex((prevIndex) => (prevIndex === product.images.length - 1 ? 0 : prevIndex + 1));
     };
 
+    const handleCommentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setComment(e.target.value);
+    };
+
+    const handleCommentSubmit = () => {
+        if (comment.trim() !== '') {
+            const newComment: Comment = {
+                text: comment,
+                timestamp: new Date().toISOString(),
+            };
+            const updatedComments = [...comments, newComment];
+            setComments(updatedComments);
+            setComment('');
+            // Here you would also update the product's comments if this were a real application
+            // e.g., updateProductComments(product.id, updatedComments);
+        }
+    };
+
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            handleCommentSubmit();
+        }
+    };
+
     return (
         <div className={styles.container}>
             <div className={styles.productGrid}>
@@ -142,9 +175,30 @@ const ProductPage = () => {
                     <div className={styles.productPrice}>{product.price}</div>
                     <p className={styles.productDescription}>{product.description}</p>
 
-
-
                     <div className={styles.uploadDate}>Uploaded {product.getUploadTimeAgo()}</div>
+
+                    {/* Comment Section */}
+                    <div className={styles.commentSection}>
+                        <h2>Comments</h2>
+                        <div className={styles.commentList}>
+                            {comments.map((comment, index) => (
+                                <div key={index} className={styles.comment}>
+                                    <p className={styles.commentText}>{comment.text}</p>
+                                    <span className={styles.commentTimestamp}>{new Date(comment.timestamp).toLocaleString()}</span>
+                                </div>
+                            ))}
+                        </div>
+                        <div className={styles.commentInputWrapper}>
+                            <input
+                                type="text"
+                                value={comment}
+                                onChange={handleCommentChange}
+                                onKeyDown={handleKeyDown}
+                                className={styles.commentInput}
+                                placeholder="Write a comment..."
+                            />
+                        </div>
+                    </div>
                 </div>
             </div>
 

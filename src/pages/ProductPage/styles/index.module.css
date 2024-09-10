@@ -1,5 +1,6 @@
 .container {
     padding-top: 6rem;
+    padding-bottom: 6rem;
     margin: 0 auto;
     max-width: 1024px;
     display: flex;
@@ -197,4 +198,40 @@
 .customDivider {
     border-top: 4px solid black;
     margin: 1rem 0;
+}
+
+.commentSection {
+    margin-top: 2rem;
+}
+
+.commentList {
+    max-height: 200px;
+    overflow-y: auto;
+    margin-bottom: 1rem;
+}
+
+.comment {
+    padding: 0.5rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.commentInputWrapper {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.commentInput {
+    flex: 1;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.commentButton {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
 }
