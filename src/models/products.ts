@@ -3,19 +3,23 @@ export class Product {
     title: string;
     description: string;
     uploadDate: string;
+    price: string;
     coverImage: string;
     images: string[];
+    comments: string[];
     upvoteUserIds: number[];
     downvoteUserIds: number[];
     favoriteUserIds: number[];
 
-    constructor(id: number, title: string, description: string, uploadDate: string, coverImage: string, images: string[], upvoteUserIds: number[], downvoteUserIds: number[], favoriteUserIds: number[]) {
+    constructor(id: number, title: string, description: string, uploadDate: string, price: string, coverImage: string, images: string[], comments: string[], upvoteUserIds: number[], downvoteUserIds: number[], favoriteUserIds: number[]) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.uploadDate = uploadDate;
+        this.price = price;
         this.coverImage = coverImage;
         this.images = images;
+        this.comments = comments
         this.upvoteUserIds = upvoteUserIds;
         this.downvoteUserIds = downvoteUserIds;
         this.favoriteUserIds = favoriteUserIds;
