@@ -10,13 +10,15 @@ import { OrganisationList } from "./pages/Admin/OrganisationList";
 import { UserEdit } from "./pages/Admin/UserEdit";
 import { UsersList } from "./pages/Admin/UsersList";
 import Contact from "./pages/Contact";
-import Dashboard from "./pages/dashboard";
 import Download from "./pages/Download";
 import Thanks from "./pages/Download/Thanks";
-import Faq from "./pages/Faq";
 import Home from "./pages/Home";
-import { Login } from "./pages/Login";
 import Prices from "./pages/Prices";
+import Dashboard from './pages/dashboard';
+import { Login } from './pages/Login';
+import Faq from './pages/Faq';
+import Marketplace from './pages/Marketplace';
+import ProductPage from './pages/ProductPage';
 import { PricesList } from "./pages/Prices/PricesList";
 import Profile from "./pages/Profile";
 import { Register } from "./pages/Register";
@@ -50,6 +52,7 @@ root.render(
             <Route path="contact" element={<Contact />} />
             <Route path="profile" element={<Profile />} />
             <Route path="faq" element={<Faq />} />
+            <Route path="marketplace" element={<Marketplace />} />
             <Route
               path="dashboard"
               element={
@@ -124,14 +127,11 @@ root.render(
               <Route path="1" element={<PricesList />} />
               <Route path="1" element={<PricesList />} />
             </Route>
+            <Route path="product/:id" element={<ProductPage />} />
           </Routes>
         </main>
       </BrowserRouter>
     </ChakraProvider>
   </React.StrictMode>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

@@ -78,7 +78,7 @@ const Header = () => {
               <Link className={styles.link} to="/faq">
                 FAQ
               </Link>
-
+              <Link className={styles.link} to="/marketplace">Marketplace</Link>
               <Link className={styles.link} to="/dashboard">
                 Dashboard
               </Link>
