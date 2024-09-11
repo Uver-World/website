@@ -214,14 +214,13 @@ const ProductPage = () => {
                 </div>
             </div>
 
-            {/* Modal to display images */}
             <Modal
                 show={showModal}
                 onHide={closeModal}
                 size="lg"
                 centered
-                contentClassName={styles.modalContent} /* Custom class for modal */
-                dialogClassName={styles.modalDialog} /* Ensures dialog width */
+                contentClassName={styles.modalContent}
+                dialogClassName={styles.modalDialog}
             >
                 <div className={styles.modalOverlay}>
                     <Button variant="light" onClick={handlePreviousImage} className={styles.modalNavButton}>
