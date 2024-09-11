@@ -6,7 +6,6 @@ import styles from "./styles/index.module.css";
 import { Product } from '../../models/products';
 import { Divider } from '@chakra-ui/react';
 
-// Mock Comment type with timestamp
 interface Comment {
     text: string;
     timestamp: string;
@@ -25,9 +24,8 @@ const ProductPage = () => {
 
     useEffect(() => {
         const fakeProducts = [
-            new Product(1, "Product 1", "Description for product 1", "2023-01-01", "10€", "https://mrwallpaper.com/images/hd/1920x1080-hd-nature-old-mountain-o3g4tz5qe34ij38f.jpg", ["https://mrwallpaper.com/images/hd/1920x1080-hd-nature-old-mountain-o3g4tz5qe34ij38f.jpg"], [{ text: "terrible", timestamp: "2023-01-01T12:00:00Z" }, { text: "awful", timestamp: "2023-01-02T12:00:00Z" }], [1], [], [1, 2]),
-            new Product(2, "AMANSON Boîtier PC pré-installé 9 Ventilateurs ARGB", "Description", "2023-02-01", "10€", "https://images.unsplash.com/photo-1553649033-3fbc8d0fa3cb?ixlib=rb-4.0.3", ["https://images.unsplash.com/photo-1553649033-3fbc8d0fa3cb?ixlib=rb-4.0.3"], [{ text: "terrible", timestamp: "2023-01-01T12:00:00Z" }, { text: "awful", timestamp: "2023-01-02T12:00:00Z" }], [], [1], []),
-            // Add other products...
+            new Product(1, "Product 1", "Description for product 1", "2023-01-01", "109.90€", "https://mrwallpaper.com/images/hd/1920x1080-hd-nature-old-mountain-o3g4tz5qe34ij38f.jpg", ["https://mrwallpaper.com/images/hd/1920x1080-hd-nature-old-mountain-o3g4tz5qe34ij38f.jpg"], [{ text: "terrible", timestamp: "2023-01-01T12:00:00Z" }, { text: "awful", timestamp: "2023-01-02T12:00:00Z" }], [1], [], [1, 2]),
+            new Product(2, "Magniumgear NEO Qube 2 IM, Double Chambre ATX Mid-tour, Digital-RGB Infinity Mirror panneau avant, Panneaux en verre trempé, Blanc, (MG-NE620QI_DWT02)", "- Le châssis mi-tour à double chambre rend la construction et la gestion des câbles faciles tout en présentant les composants du système.", "2023-02-01", "89.99€", "https://images.unsplash.com/photo-1553649033-3fbc8d0fa3cb?ixlib=rb-4.0.3", ["https://images.unsplash.com/photo-1553649033-3fbc8d0fa3cb?ixlib=rb-4.0.3", "https://mrwallpaper.com/images/hd/1920x1080-hd-nature-old-mountain-o3g4tz5qe34ij38f.jpg"], [{ text: "terrible", timestamp: "2023-01-01T12:00:00Z" }, { text: "awful", timestamp: "2023-01-02T12:00:00Z" }], [], [1], []),
         ];
         const selectedProduct = fakeProducts.find(p => p.id === productId);
         if (selectedProduct) {
@@ -124,8 +122,6 @@ const ProductPage = () => {
             const updatedComments = [...comments, newComment];
             setComments(updatedComments);
             setComment('');
-            // Here you would also update the product's comments if this were a real application
-            // e.g., updateProductComments(product.id, updatedComments);
         }
     };
 
@@ -151,6 +147,26 @@ const ProductPage = () => {
                             />
                         ))}
                     </div>
+                    <div className={styles.productActionSection}>
+                        <div className={styles.priceSection}>
+                            <span>{product.price}</span>
+                        </div>
+                        <div className={styles.deliveryInfo}>
+                            <p>Ships to: <strong>EU</strong></p>
+                        </div>
+                        <div className={styles.stockInfo}>
+                            <p><strong>Available</strong></p>
+                        </div>
+                        <div className={styles.actionButtons}>
+                            <Button className={styles.addToCartButton}>Add to Cart</Button>
+                            <Button className={styles.buyNowButton}>Buy Now</Button>
+                        </div>
+                        <div className={styles.sellerInfo}>
+                            <p>Sold by: <strong>Clement ozor (le mec qui bosse jamais)</strong></p>
+                            <p>Shipped by: <strong>Epitech la zoneee</strong></p>
+                            <p>Cancelation: <strong>30-day cancelation policy</strong></p>
+                        </div>
+                    </div>
                 </div>
 
                 <div className={styles.productDetailsWrapper}>
@@ -174,50 +190,48 @@ const ProductPage = () => {
                     <Divider className={styles.customDivider}></Divider>
                     <div className={styles.productPrice}>{product.price}</div>
                     <p className={styles.productDescription}>{product.description}</p>
-
                     <div className={styles.uploadDate}>Uploaded {product.getUploadTimeAgo()}</div>
 
-                    {/* Comment Section */}
                     <div className={styles.commentSection}>
                         <h2>Comments</h2>
                         <div className={styles.commentList}>
                             {comments.map((comment, index) => (
                                 <div key={index} className={styles.comment}>
-                                    <p className={styles.commentText}>{comment.text}</p>
-                                    <span className={styles.commentTimestamp}>{new Date(comment.timestamp).toLocaleString()}</span>
+                                    <p>{comment.text}</p>
+                                    <span>{new Date(comment.timestamp).toLocaleString()}</span>
                                 </div>
                             ))}
                         </div>
-                        <div className={styles.commentInputWrapper}>
-                            <input
-                                type="text"
-                                value={comment}
-                                onChange={handleCommentChange}
-                                onKeyDown={handleKeyDown}
-                                className={styles.commentInput}
-                                placeholder="Write a comment..."
-                            />
-                        </div>
+                        <input
+                            type="text"
+                            value={comment}
+                            onChange={handleCommentChange}
+                            onKeyDown={handleKeyDown}
+                            placeholder="Add a comment..."
+                            className={styles.commentInput}
+                        />
                     </div>
                 </div>
             </div>
 
-            <Modal show={showModal} onHide={closeModal} centered className={styles.modalOverlay}>
-                <Modal.Body className={styles.modalBody}>
-                    <div className={styles.modalImageWrapper}>
-                        <Button variant="light" className={styles.modalArrowLeft} onClick={handlePreviousImage}>
-                            <FaArrowLeft />
-                        </Button>
-                        <img
-                            src={product.images[currentImageIndex]}
-                            alt={`Product image ${currentImageIndex}`}
-                            className={styles.modalImage}
-                        />
-                        <Button variant="light" className={styles.modalArrowRight} onClick={handleNextImage}>
-                            <FaArrowRight />
-                        </Button>
-                    </div>
-                </Modal.Body>
+            {/* Modal to display images */}
+            <Modal
+                show={showModal}
+                onHide={closeModal}
+                size="lg"
+                centered
+                contentClassName={styles.modalContent} /* Custom class for modal */
+                dialogClassName={styles.modalDialog} /* Ensures dialog width */
+            >
+                <div className={styles.modalOverlay}>
+                    <Button variant="light" onClick={handlePreviousImage} className={styles.modalNavButton}>
+                        <FaArrowLeft />
+                    </Button>
+                    <img src={product.images[currentImageIndex]} alt={`Product image ${currentImageIndex}`} className={styles.modalImage} />
+                    <Button variant="light" onClick={handleNextImage} className={styles.modalNavButton}>
+                        <FaArrowRight />
+                    </Button>
+                </div>
             </Modal>
         </div>
     );
