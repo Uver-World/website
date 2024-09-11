@@ -141,7 +141,7 @@ const ProductPage = () => {
                             <img
                                 key={index}
                                 src={img}
-                                alt={`Product image ${index}`}
+                                alt={`${index}`}
                                 className={styles.smallImage}
                                 onClick={() => openModal(index)}
                             />
@@ -226,7 +226,7 @@ const ProductPage = () => {
                     <Button variant="light" onClick={handlePreviousImage} className={styles.modalNavButton}>
                         <FaArrowLeft />
                     </Button>
-                    <img src={product.images[currentImageIndex]} alt={`Product image ${currentImageIndex}`} className={styles.modalImage} />
+                    <img src={product.images[currentImageIndex]} alt={`${currentImageIndex}`} className={styles.modalImage} />
                     <Button variant="light" onClick={handleNextImage} className={styles.modalNavButton}>
                         <FaArrowRight />
                     </Button>
