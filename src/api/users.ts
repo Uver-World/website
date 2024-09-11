@@ -116,7 +116,6 @@ export const checkUserExists = async (
         "X-User-Token": TOKEN,
       },
     });
-    console.log(response);
     return response;
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -294,6 +293,31 @@ export const updateUsername = async (
           Username: newUsername,
         },
       ],
+      {
+        headers: {
+          "X-User-Token": TOKEN,
+        },
+      }
+    );
+    return response;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error("AxiosError:", error.message);
+      console.error("Response data:", error.response?.data);
+    } else {
+      console.error("Error:", (error as Error).message);
+    }
+    throw error;
+  }
+};
+
+export const verifyPermission = async (
+  userId: string,
+  permissionName: string
+): Promise<AxiosResponse> => {
+  try {
+    const response = await axios.get(
+      `${API_URL}/user/check-permission/${userId}/permissions/${permissionName}`,
       {
         headers: {
           "X-User-Token": TOKEN,

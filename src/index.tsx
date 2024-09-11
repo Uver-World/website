@@ -1,45 +1,45 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './assets/styles/globals.css';
-import reportWebVitals from './reportWebVitals';
+import { ChakraProvider } from "@chakra-ui/react";
+import React from "react";
+import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
+import "./assets/styles/globals.css";
 import Header from "./layouts/Header";
+import About from "./pages/About";
+import { OrganisationEdit } from "./pages/Admin/OrganisationEdit";
+import { OrganisationList } from "./pages/Admin/OrganisationList";
+import { UserEdit } from "./pages/Admin/UserEdit";
+import { UsersList } from "./pages/Admin/UsersList";
+import Contact from "./pages/Contact";
 import Download from "./pages/Download";
 import Thanks from "./pages/Download/Thanks";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import Profile from "./pages/Profile";
-import { UsersList } from "./pages/Admin/UsersList";
-import { OrganisationList } from "./pages/Admin/OrganisationList";
-import { OrganisationEdit } from "./pages/Admin/OrganisationEdit";
-import { ChakraProvider } from "@chakra-ui/react";
-import { UserEdit } from "./pages/Admin/UserEdit";
-import { PricesList } from "./pages/Prices/PricesList"
+import Home from "./pages/Home";
 import Prices from "./pages/Prices";
 import Dashboard from './pages/dashboard';
-import { Register } from './pages/Register';
 import { Login } from './pages/Login';
-import { ProtectedRoute } from './protected';
 import Faq from './pages/Faq';
 import Marketplace from './pages/Marketplace';
 import ProductPage from './pages/ProductPage';
-
+import { PricesList } from "./pages/Prices/PricesList";
+import Profile from "./pages/Profile";
+import { Register } from "./pages/Register";
+import { ProtectedRoute } from "./protected";
+import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
-
-const adminGroups = ["Website", "User"];
 
 root.render(
   <React.StrictMode>
     <ChakraProvider>
       <BrowserRouter>
         <Header />
-        <main className="bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-100 min-h-screen" style={{
-          background: "#D4DCDE"
-        }}>
+        <main
+          className="min-h-screen bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-100"
+          style={{
+            background: "#D4DCDE",
+          }}
+        >
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="register" element={<Register />}></Route>
@@ -53,15 +53,73 @@ root.render(
             <Route path="profile" element={<Profile />} />
             <Route path="faq" element={<Faq />} />
             <Route path="marketplace" element={<Marketplace />} />
-            <Route path="/dashboard" element={<ProtectedRoute groups={adminGroups} child={<Dashboard />} />} />
+            <Route
+              path="dashboard"
+              element={
+                <ProtectedRoute
+                  permissions={[
+                    "organisation.all",
+                    "organisation.see",
+                    "organisation.edit",
+                    "organisation.members.all",
+                    "organisation.members.edit",
+                  ]}
+                  child={<Dashboard />}
+                />
+              }
+            />
             <Route path="admin">
               <Route path="users">
-                <Route index element={<ProtectedRoute groups={adminGroups} child= {<UsersList />} />} />
-                <Route path=":id" element={<ProtectedRoute groups={adminGroups} child= {<UserEdit />} />} />
+                <Route
+                  index
+                  element={
+                    <ProtectedRoute
+                      permissions={[
+                        "organisation.all",
+                        "organisation.members.all",
+                        "organisation.members.edit",
+                      ]}
+                      child={<UsersList />}
+                    />
+                  }
+                />
+                <Route
+                  path=":id"
+                  element={
+                    <ProtectedRoute
+                      permissions={[
+                        "organisation.all",
+                        "organisation.members.all",
+                        "organisation.members.edit",
+                      ]}
+                      child={<UserEdit />}
+                    />
+                  }
+                />
               </Route>
               <Route path="organisations">
-                <Route index element={<ProtectedRoute groups={adminGroups} child= {<OrganisationList />} />} />
-                <Route path=":id" element={<ProtectedRoute groups={adminGroups} child= {<OrganisationEdit />} />} />
+                <Route
+                  index
+                  element={
+                    <ProtectedRoute
+                      permissions={[
+                        "organisation.all",
+                        "organisation.see",
+                        "organisation.edit",
+                      ]}
+                      child={<OrganisationList />}
+                    />
+                  }
+                />
+                <Route
+                  path=":id"
+                  element={
+                    <ProtectedRoute
+                      permissions={["organisation.all", "organisation.edit"]}
+                      child={<OrganisationEdit />}
+                    />
+                  }
+                />
               </Route>
             </Route>
             <Route path="prices">
@@ -76,8 +134,4 @@ root.render(
     </ChakraProvider>
   </React.StrictMode>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

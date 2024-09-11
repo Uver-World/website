@@ -30,7 +30,6 @@ interface User {
   username: string;
   unique_id: string;
   logins: [];
-  group: string;
   authentication: {
     Credentials: {
       email: string;
