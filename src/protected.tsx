@@ -15,9 +15,10 @@ export const ProtectedRoute = ({ child, permissions }: ProtectedRouteProps) => {
   useEffect(() => {
     const checkAccess = async (userId: string): Promise<boolean> => {
       let result: boolean = false;
+      const token = localStorage.getItem("token") || "";
 
       for (const permission of permissions) {
-        const response = await verifyPermission(userId, permission);
+        const response = await verifyPermission(userId, permission, token);
 
         if (response.data === true || response.data === "true") {
           result = true;

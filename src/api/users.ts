@@ -313,14 +313,15 @@ export const updateUsername = async (
 
 export const verifyPermission = async (
   userId: string,
-  permissionName: string
+  permissionName: string,
+  token: string
 ): Promise<AxiosResponse> => {
   try {
     const response = await axios.get(
       `${API_URL}/user/check-permission/${userId}/permissions/${permissionName}`,
       {
         headers: {
-          "X-User-Token": TOKEN,
+          "X-User-Token": token,
         },
       }
     );
