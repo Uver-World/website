@@ -26,7 +26,7 @@ jobs:
       - name: npm install, build, and test
         env:
           REACT_APP_API_URL: http://x2025uverworld1833467632001.francecentral.cloudapp.azure.com:8000
-          REACT_APP_API_TOKEN: 6trxi8FaF7DWOLuakATLklajuLejxOVM
+          REACT_APP_API_TOKEN: qFcO6cNYJxSfS8SsHiE2HY5aKlSVUjs3
         run: |
           npm install
           npm run build --if-present
